@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Resolver.DependencyResolver;
 
 namespace Lab_Test
 {
@@ -22,9 +23,9 @@ namespace Lab_Test
         {
             services.AddControllersWithViews();
             services.AddMvc();
-            services.AddDbContext<LabTestContext>(options =>
+            services.AddDbContext<LabTestDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("LabTestContext")));
-
+            new DependencyResolverProfile().ConfigServiceMap(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

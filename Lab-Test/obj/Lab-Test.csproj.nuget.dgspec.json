@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Lab-Test\\Lab-Test\\Lab-Test.csproj": {}
+    "D:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj": {}
   },
   "projects": {
-    "D:\\Lab-Test\\Lab-Test\\Lab-Test.csproj": {
+    "D:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Lab-Test\\Lab-Test\\Lab-Test.csproj",
+        "projectUniqueName": "D:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj",
         "projectName": "Lab-Test",
-        "projectPath": "D:\\Lab-Test\\Lab-Test\\Lab-Test.csproj",
+        "projectPath": "D:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj",
         "packagesPath": "C:\\Users\\chitt\\.nuget\\packages\\",
-        "outputPath": "D:\\Lab-Test\\Lab-Test\\obj\\",
+        "outputPath": "D:\\Lab-Test-Core-MVC\\Lab-Test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chitt\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -27,7 +27,11 @@
         "frameworks": {
           "net5.0": {
             "targetAlias": "net5.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj": {
+                "projectPath": "D:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj"
+              }
+            }
           }
         },
         "warningProperties": {
@@ -79,7 +83,328 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.408\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Lab-Test-Core-MVC\\Model\\Model.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Lab-Test-Core-MVC\\Model\\Model.csproj",
+        "projectName": "Model",
+        "projectPath": "D:\\Lab-Test-Core-MVC\\Model\\Model.csproj",
+        "packagesPath": "C:\\Users\\chitt\\.nuget\\packages\\",
+        "outputPath": "D:\\Lab-Test-Core-MVC\\Model\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\chitt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj",
+        "projectName": "ProjectContext",
+        "projectPath": "D:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj",
+        "packagesPath": "C:\\Users\\chitt\\.nuget\\packages\\",
+        "outputPath": "D:\\Lab-Test-Core-MVC\\ProjectContext\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\chitt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "D:\\Lab-Test-Core-MVC\\Model\\Model.csproj": {
+                "projectPath": "D:\\Lab-Test-Core-MVC\\Model\\Model.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj",
+        "projectName": "Repository",
+        "projectPath": "D:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj",
+        "packagesPath": "C:\\Users\\chitt\\.nuget\\packages\\",
+        "outputPath": "D:\\Lab-Test-Core-MVC\\Repositor\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\chitt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "D:\\Lab-Test-Core-MVC\\Model\\Model.csproj": {
+                "projectPath": "D:\\Lab-Test-Core-MVC\\Model\\Model.csproj"
+              },
+              "D:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj": {
+                "projectPath": "D:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj",
+        "projectName": "Resolver",
+        "projectPath": "D:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj",
+        "packagesPath": "C:\\Users\\chitt\\.nuget\\packages\\",
+        "outputPath": "D:\\Lab-Test-Core-MVC\\Resolver\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\chitt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "D:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj": {
+                "projectPath": "D:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj"
+              },
+              "D:\\Lab-Test-Core-MVC\\Service\\Service.csproj": {
+                "projectPath": "D:\\Lab-Test-Core-MVC\\Service\\Service.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[11.0.0, )"
+            },
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.17, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Lab-Test-Core-MVC\\Service\\Service.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Lab-Test-Core-MVC\\Service\\Service.csproj",
+        "projectName": "Service",
+        "projectPath": "D:\\Lab-Test-Core-MVC\\Service\\Service.csproj",
+        "packagesPath": "C:\\Users\\chitt\\.nuget\\packages\\",
+        "outputPath": "D:\\Lab-Test-Core-MVC\\Service\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\chitt\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "D:\\Lab-Test-Core-MVC\\Model\\Model.csproj": {
+                "projectPath": "D:\\Lab-Test-Core-MVC\\Model\\Model.csproj"
+              },
+              "D:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj": {
+                "projectPath": "D:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }
