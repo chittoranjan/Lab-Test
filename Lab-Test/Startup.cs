@@ -1,10 +1,10 @@
-using Lab_Test.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using ProjectContext.ProjectDbContext;
 using Resolver.DependencyResolver;
 
 namespace Lab_Test

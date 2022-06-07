@@ -8,7 +8,7 @@ namespace ProjectContext.ModelConfig
     {
         public void ModelBuilderConfig(ModelBuilder builder)
         {
-           // builder.HasDefaultSchema("dbo");
+            builder.HasDefaultSchema("dbo");
 
             new ExpenseItemConfig()?.Configure(builder.Entity<ExpenseItem>());
         }

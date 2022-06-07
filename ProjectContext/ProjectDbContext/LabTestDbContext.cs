@@ -2,12 +2,12 @@
 using Model.EntityModels.ExpenseModels;
 using ProjectContext.ModelConfig;
 
-namespace Lab_Test.Models
+namespace ProjectContext.ProjectDbContext
 {
     public class LabTestDbContext:DbContext
     {
         private readonly DbContextOptions _context;
-        public LabTestDbContext(DbContextOptions context) : base(context)
+        public LabTestDbContext(DbContextOptions<LabTestDbContext> context) : base(context)
         {
             _context = context;
         }

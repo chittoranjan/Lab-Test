@@ -1,11 +1,11 @@
-﻿using Lab_Test.Models;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using Repository.IRepositories;
-using Repository.Repositories;
+using ProjectContext.ProjectDbContext;
+using Repository.IRepositories.IExpenseRepositories;
+using Repository.Repositories.ExpenseRepositories;
 using Resolver.ModelMapper;
-using Service.IServices;
-using Service.Services;
+using Service.IServices.IExpenseServices;
+using Service.Services.ExpenseServices;
 
 namespace Resolver.DependencyResolver
 {

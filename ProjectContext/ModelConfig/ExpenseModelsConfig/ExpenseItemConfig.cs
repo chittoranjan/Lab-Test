@@ -10,9 +10,9 @@ namespace ProjectContext.ModelConfig.ExpenseModelsConfig
         public void Configure(EntityTypeBuilder<ExpenseItem> builder)
         {
             builder.HasKey(c => c.Id);
-            //builder.Property(c => c.Question).HasMaxLength(FAPILength.GeneralText200Length);
-            //builder.Property(c => c.Answer).HasMaxLength(FAPILength.Description1000Length);
-          //  builder.ToTable("ExpenseItem");
+            builder.Property(c => c.Name).HasMaxLength(PropertyLength.Name100Length);
+            builder.Property(c => c.Description).HasMaxLength(PropertyLength.Description500Length);
+            builder.ToTable("ExpenseItem");
         }
     }
 }

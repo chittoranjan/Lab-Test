@@ -1,9 +1,9 @@
-﻿using Lab_Test.Models;
-using Model.EntityModels.ExpenseModels;
+﻿using Model.EntityModels.ExpenseModels;
+using ProjectContext.ProjectDbContext;
 using Repository.BaseRepository;
-using Repository.IRepositories;
+using Repository.IRepositories.IExpenseRepositories;
 
-namespace Repository.Repositories
+namespace Repository.Repositories.ExpenseRepositories
 {
     public class ExpenseItemRepository : BaseRepository<ExpenseItem>, IExpenseItemRepository
     {

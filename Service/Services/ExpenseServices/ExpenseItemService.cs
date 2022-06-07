@@ -1,9 +1,9 @@
 ﻿using Model.EntityModels.ExpenseModels;
-using Repository.IRepositories;
+using Repository.IRepositories.IExpenseRepositories;
 using Service.BaseService;
-using Service.IServices;
+using Service.IServices.IExpenseServices;
 
-namespace Service.Services
+namespace Service.Services.ExpenseServices
 {
     public class ExpenseItemService : BaseService<ExpenseItem>, IExpenseItemService
     {

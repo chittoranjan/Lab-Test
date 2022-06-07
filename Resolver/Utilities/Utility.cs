@@ -10,7 +10,7 @@ namespace Resolver.Utilities
     {
         public static FilePathModel GetFileUrl(IFormFile file)
         {
-            var folderName = Path.Combine("Resources", "IJLSS_Journals");
+            var folderName = Path.Combine("Resources", "Test");
             var pathToSave = Path.Combine(Directory.GetCurrentDirectory(), folderName);
             var filePath = new FilePathModel();
             if (file == null || file.Length <= 0) return filePath;
