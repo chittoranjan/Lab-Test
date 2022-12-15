@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj": {}
+    "G:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj": {}
   },
   "projects": {
-    "D:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj": {
+    "G:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj",
+        "projectUniqueName": "G:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj",
         "projectName": "Lab-Test",
-        "projectPath": "D:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj",
+        "projectPath": "G:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj",
         "packagesPath": "C:\\Users\\chitt\\.nuget\\packages\\",
-        "outputPath": "D:\\Lab-Test-Core-MVC\\Lab-Test\\obj\\",
+        "outputPath": "G:\\Lab-Test-Core-MVC\\Lab-Test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chitt\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj": {
-                "projectPath": "D:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj"
+              "G:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj": {
+                "projectPath": "G:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj"
               }
             }
           }
@@ -75,7 +75,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -87,18 +88,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Lab-Test-Core-MVC\\Model\\Model.csproj": {
+    "G:\\Lab-Test-Core-MVC\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Lab-Test-Core-MVC\\Model\\Model.csproj",
+        "projectUniqueName": "G:\\Lab-Test-Core-MVC\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "D:\\Lab-Test-Core-MVC\\Model\\Model.csproj",
+        "projectPath": "G:\\Lab-Test-Core-MVC\\Model\\Model.csproj",
         "packagesPath": "C:\\Users\\chitt\\.nuget\\packages\\",
-        "outputPath": "D:\\Lab-Test-Core-MVC\\Model\\obj\\",
+        "outputPath": "G:\\Lab-Test-Core-MVC\\Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chitt\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -132,7 +133,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -141,18 +143,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj": {
+    "G:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj",
+        "projectUniqueName": "G:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj",
         "projectName": "ProjectContext",
-        "projectPath": "D:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj",
+        "projectPath": "G:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj",
         "packagesPath": "C:\\Users\\chitt\\.nuget\\packages\\",
-        "outputPath": "D:\\Lab-Test-Core-MVC\\ProjectContext\\obj\\",
+        "outputPath": "G:\\Lab-Test-Core-MVC\\ProjectContext\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chitt\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -169,8 +171,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Lab-Test-Core-MVC\\Model\\Model.csproj": {
-                "projectPath": "D:\\Lab-Test-Core-MVC\\Model\\Model.csproj"
+              "G:\\Lab-Test-Core-MVC\\Model\\Model.csproj": {
+                "projectPath": "G:\\Lab-Test-Core-MVC\\Model\\Model.csproj"
               }
             }
           }
@@ -204,7 +206,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -213,18 +216,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj": {
+    "G:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj",
+        "projectUniqueName": "G:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj",
         "projectName": "Repository",
-        "projectPath": "D:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj",
+        "projectPath": "G:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj",
         "packagesPath": "C:\\Users\\chitt\\.nuget\\packages\\",
-        "outputPath": "D:\\Lab-Test-Core-MVC\\Repositor\\obj\\",
+        "outputPath": "G:\\Lab-Test-Core-MVC\\Repositor\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chitt\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -241,11 +244,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Lab-Test-Core-MVC\\Model\\Model.csproj": {
-                "projectPath": "D:\\Lab-Test-Core-MVC\\Model\\Model.csproj"
+              "G:\\Lab-Test-Core-MVC\\Model\\Model.csproj": {
+                "projectPath": "G:\\Lab-Test-Core-MVC\\Model\\Model.csproj"
               },
-              "D:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj": {
-                "projectPath": "D:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj"
+              "G:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj": {
+                "projectPath": "G:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj"
               }
             }
           }
@@ -271,7 +274,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -280,18 +284,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj": {
+    "G:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj",
+        "projectUniqueName": "G:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj",
         "projectName": "Resolver",
-        "projectPath": "D:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj",
+        "projectPath": "G:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj",
         "packagesPath": "C:\\Users\\chitt\\.nuget\\packages\\",
-        "outputPath": "D:\\Lab-Test-Core-MVC\\Resolver\\obj\\",
+        "outputPath": "G:\\Lab-Test-Core-MVC\\Resolver\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chitt\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -308,11 +312,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj": {
-                "projectPath": "D:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj"
+              "G:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj": {
+                "projectPath": "G:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj"
               },
-              "D:\\Lab-Test-Core-MVC\\Service\\Service.csproj": {
-                "projectPath": "D:\\Lab-Test-Core-MVC\\Service\\Service.csproj"
+              "G:\\Lab-Test-Core-MVC\\Service\\Service.csproj": {
+                "projectPath": "G:\\Lab-Test-Core-MVC\\Service\\Service.csproj"
               }
             }
           }
@@ -346,7 +350,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -355,18 +360,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "D:\\Lab-Test-Core-MVC\\Service\\Service.csproj": {
+    "G:\\Lab-Test-Core-MVC\\Service\\Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Lab-Test-Core-MVC\\Service\\Service.csproj",
+        "projectUniqueName": "G:\\Lab-Test-Core-MVC\\Service\\Service.csproj",
         "projectName": "Service",
-        "projectPath": "D:\\Lab-Test-Core-MVC\\Service\\Service.csproj",
+        "projectPath": "G:\\Lab-Test-Core-MVC\\Service\\Service.csproj",
         "packagesPath": "C:\\Users\\chitt\\.nuget\\packages\\",
-        "outputPath": "D:\\Lab-Test-Core-MVC\\Service\\obj\\",
+        "outputPath": "G:\\Lab-Test-Core-MVC\\Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chitt\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -383,11 +388,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "D:\\Lab-Test-Core-MVC\\Model\\Model.csproj": {
-                "projectPath": "D:\\Lab-Test-Core-MVC\\Model\\Model.csproj"
+              "G:\\Lab-Test-Core-MVC\\Model\\Model.csproj": {
+                "projectPath": "G:\\Lab-Test-Core-MVC\\Model\\Model.csproj"
               },
-              "D:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj": {
-                "projectPath": "D:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj"
+              "G:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj": {
+                "projectPath": "G:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj"
               }
             }
           }
@@ -407,7 +412,8 @@
             "net47",
             "net471",
             "net472",
-            "net48"
+            "net48",
+            "net481"
           ],
           "assetTargetFallback": true,
           "warn": true,
@@ -416,7 +422,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }
