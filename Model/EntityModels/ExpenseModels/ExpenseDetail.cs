@@ -13,8 +13,8 @@ namespace Model.EntityModels.ExpenseModels
         public double Discount { get; set; }
         public string Note { get; set; }
 
-        public Expense Expense { get; set; }
-        public ExpenseItem ExpenseItem { get; set; }
+        public virtual Expense Expense { get; set; }
+        public virtual ExpenseItem ExpenseItem { get; set; }
 
     }
 }

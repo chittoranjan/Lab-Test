@@ -15,9 +15,16 @@ namespace Resolver.DependencyResolver
         {
             services.AddTransient<DbContext, LabTestDbContext>();
 
+            #region Expense Dependency Resolve
             services.AddTransient<IExpenseItemRepository, ExpenseItemRepository>();
             services.AddTransient<IExpenseItemService, ExpenseItemService>();
 
+            services.AddTransient<IExpenseRepository, ExpenseRepository>();
+            services.AddTransient<IExpenseService, ExpenseService>();
+
+            services.AddTransient<IExpenseDetailRepository, ExpenseDetailRepository>();
+            services.AddTransient<IExpenseDetailService, ExpenseDetailService>();
+            #endregion
 
             #region AutoMapper
 

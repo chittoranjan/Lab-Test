@@ -11,6 +11,8 @@ namespace ProjectContext.ModelConfig
             builder.HasDefaultSchema("dbo");
 
             new ExpenseItemConfig()?.Configure(builder.Entity<ExpenseItem>());
+            new ExpenseConfig()?.Configure(builder.Entity<Expense>());
+            new ExpenseDetailConfig()?.Configure(builder.Entity<ExpenseDetail>());
         }
     }
 }

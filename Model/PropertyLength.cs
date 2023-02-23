@@ -1,4 +1,4 @@
-﻿namespace ProjectContext.ModelConfig
+﻿namespace Model
 {
     public static class PropertyLength
     {

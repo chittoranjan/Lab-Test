@@ -8,8 +8,11 @@ namespace Resolver.ModelMapper
     {
         public ModelMapperProfile()
         {
-            #region Auth Map
+            #region Expense Models Map
+
             CreateMap<ExpenseItemDto, ExpenseItem>().ReverseMap();
+            CreateMap<ExpenseDto, Expense>().ReverseMap();
+            CreateMap<ExpenseDetailDto, ExpenseDetail>().ReverseMap();
 
             #endregion
             
