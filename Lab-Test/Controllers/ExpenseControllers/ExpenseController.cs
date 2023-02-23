@@ -7,22 +7,22 @@ using System.Threading.Tasks;
 
 namespace Lab_Test.Controllers.ExpenseControllers
 {
-    public class ExpenseItemController : Controller
+    public class ExpenseController : Controller
     {
         private readonly LabTestDbContext _context;
 
-        public ExpenseItemController(LabTestDbContext context)
+        public ExpenseController(LabTestDbContext context)
         {
             _context = context;
         }
 
-        // GET: ExpenseItem
+        // GET: Expense
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ExpenseItems.ToListAsync());
+            return View(await _context.Expenses.ToListAsync());
         }
 
-        // GET: ExpenseItem/Details/5
+        // GET: Expense/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -30,7 +30,7 @@ namespace Lab_Test.Controllers.ExpenseControllers
                 return NotFound();
             }
 
-            var expenseItem = await _context.ExpenseItems
+            var expenseItem = await _context.Expenses
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (expenseItem == null)
             {
@@ -40,18 +40,18 @@ namespace Lab_Test.Controllers.ExpenseControllers
             return View(expenseItem);
         }
 
-        // GET: ExpenseItem/Create
+        // GET: Expense/Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ExpenseItem/Create
+        // POST: Expense/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,UnitPrice,Description")] ExpenseItem expenseItem)
+        public async Task<IActionResult> Create([Bind("Id,Name,UnitPrice,Description")] Expense expenseItem)
         {
             if (ModelState.IsValid)
             {
@@ -62,7 +62,7 @@ namespace Lab_Test.Controllers.ExpenseControllers
             return View(expenseItem);
         }
 
-        // GET: ExpenseItem/Edit/5
+        // GET: Expense/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -70,7 +70,7 @@ namespace Lab_Test.Controllers.ExpenseControllers
                 return NotFound();
             }
 
-            var expenseItem = await _context.ExpenseItems.FindAsync(id);
+            var expenseItem = await _context.Expenses.FindAsync(id);
             if (expenseItem == null)
             {
                 return NotFound();
@@ -78,12 +78,12 @@ namespace Lab_Test.Controllers.ExpenseControllers
             return View(expenseItem);
         }
 
-        // POST: ExpenseItem/Edit/5
+        // POST: Expense/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,UnitPrice,Description")] ExpenseItem expenseItem)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,UnitPrice,Description")] Expense expenseItem)
         {
             if (id != expenseItem.Id)
             {
@@ -99,7 +99,7 @@ namespace Lab_Test.Controllers.ExpenseControllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ExpenseItemExists(expenseItem.Id))
+                    if (!ExpenseExists(expenseItem.Id))
                     {
                         return NotFound();
                     }
@@ -113,7 +113,7 @@ namespace Lab_Test.Controllers.ExpenseControllers
             return View(expenseItem);
         }
 
-        // GET: ExpenseItem/Delete/5
+        // GET: Expense/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -121,7 +121,7 @@ namespace Lab_Test.Controllers.ExpenseControllers
                 return NotFound();
             }
 
-            var expenseItem = await _context.ExpenseItems
+            var expenseItem = await _context.Expenses
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (expenseItem == null)
             {
@@ -131,20 +131,20 @@ namespace Lab_Test.Controllers.ExpenseControllers
             return View(expenseItem);
         }
 
-        // POST: ExpenseItem/Delete/5
+        // POST: Expense/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var expenseItem = await _context.ExpenseItems.FindAsync(id);
-            if (expenseItem != null) _context.ExpenseItems.Remove(expenseItem);
+            var expense = await _context.Expenses.FindAsync(id);
+            if (expense != null) _context.Expenses.Remove(expense);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ExpenseItemExists(int id)
+        private bool ExpenseExists(int id)
         {
-            return _context.ExpenseItems.Any(e => e.Id == id);
+            return _context.Expenses.Any(e => e.Id == id);
         }
     }
 }
