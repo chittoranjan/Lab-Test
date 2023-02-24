@@ -15,6 +15,8 @@ namespace Service.BaseService
         {
             Repository = iBaseRepository;
         }
+
+        #region Add
         public virtual bool Add(T entity)
         {
             return Repository.Add(entity);
@@ -35,6 +37,9 @@ namespace Service.BaseService
             return await Repository.AddRangeAsync(entities);
         }
 
+        #endregion
+
+        #region Update
         public virtual bool Update(T entity)
         {
             return Repository.Update(entity);
@@ -55,20 +60,46 @@ namespace Service.BaseService
             return await Repository.UpdateRangeAsync(entities);
         }
 
+        #endregion
+
+        #region AddOrUpdate
         public virtual bool AddOrUpdate(Expression<Func<T, object>> identifier, ICollection<T> entityCollections)
         {
             return Repository.AddOrUpdate(identifier, entityCollections);
         }
 
+        public virtual Task<bool> AddOrUpdateAsync(Expression<Func<T, object>> identifier, ICollection<T> entityCollections)
+        {
+            return Repository.AddOrUpdateAsync(identifier, entityCollections);
+        }
+
+
+        #endregion
+
+        #region Remove
         public virtual bool Remove(T entity, bool isRemove)
         {
             return Repository.Remove(entity, isRemove);
+        }
+
+        public Task<bool> RemoveAsync(T entity, bool isRemove)
+        {
+            return Repository.RemoveAsync(entity, isRemove);
         }
 
         public virtual bool RemoveRange(ICollection<T> entities, bool isRemove)
         {
             return Repository.RemoveRange(entities, isRemove);
         }
+
+        public Task<bool> RemoveRangeAsync(ICollection<T> entities, bool isRemove)
+        {
+            return Repository.RemoveRangeAsync(entities, isRemove);
+        }
+
+        #endregion
+
+        #region GetById
 
         public virtual T GetById(int id)
         {
@@ -79,6 +110,10 @@ namespace Service.BaseService
         {
             return await Repository.GetByIdAsync(id);
         }
+
+        #endregion
+
+        #region GetAll
 
         public virtual ICollection<T> GetAll()
         {
@@ -120,6 +155,10 @@ namespace Service.BaseService
             return await Repository.GetAsync(predicate, isTracking, includes);
         }
 
+
+        #endregion
+
+        #region GetFirstOrDefault
         public virtual T GetFirstOrDefault(Expression<Func<T, bool>> predicate, bool isTracking = true)
         {
             return Repository.GetFirstOrDefault(predicate, isTracking);
@@ -150,6 +189,9 @@ namespace Service.BaseService
             return await Repository.GetFirstOrDefaultAsync(predicate, isTracking, includes);
         }
 
+        #endregion
+
+        #region GetLastOrDefault
         public virtual T GetLastOrDefault(Expression<Func<T, bool>> predicate, bool isTracking = true)
         {
             return Repository.GetLastOrDefault(predicate, isTracking);
@@ -180,6 +222,11 @@ namespace Service.BaseService
             return await Repository.GetLastOrDefaultAsync(predicate, isTracking, includes);
         }
 
+
+        #endregion
+
+        #region GetDeleted
+
         public virtual ICollection<T> GetDeleted(Expression<Func<T, bool>> predicate, bool isTracking = true)
         {
             return Repository.GetDeleted(predicate, isTracking);
@@ -189,5 +236,8 @@ namespace Service.BaseService
         {
             return await Repository.GetDeletedAsync(predicate, isTracking);
         }
+
+        #endregion
+
     }
 }

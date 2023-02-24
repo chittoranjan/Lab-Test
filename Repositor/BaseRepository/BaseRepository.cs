@@ -27,19 +27,19 @@ namespace Repository.BaseRepository
             return Db.SaveChanges() > 0;
         }
 
-        public bool AddRange(ICollection<T> entities)
+        public virtual bool AddRange(ICollection<T> entities)
         {
             Table.AddRange(entities);
             return Db.SaveChanges() > 0;
         }
 
-        public async Task<bool> AddAsync(T entity)
+        public virtual async Task<bool> AddAsync(T entity)
         {
             Table.Add(entity);
             return await Db.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> AddRangeAsync(ICollection<T> entities)
+        public virtual async Task<bool> AddRangeAsync(ICollection<T> entities)
         {
             Table.AddRange(entities);
             return await Db.SaveChangesAsync() > 0;
@@ -54,19 +54,19 @@ namespace Repository.BaseRepository
             return Db.SaveChanges() > 0;
         }
 
-        public bool UpdateRange(ICollection<T> entities)
+        public virtual bool UpdateRange(ICollection<T> entities)
         {
             Table.UpdateRange(entities);
             return Db.SaveChanges() > 0;
         }
 
-        public async Task<bool> UpdateAsync(T entity)
+        public virtual async Task<bool> UpdateAsync(T entity)
         {
             Db.Entry(entity).State = EntityState.Modified;
             return await Db.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> UpdateRangeAsync(ICollection<T> entities)
+        public virtual async Task<bool> UpdateRangeAsync(ICollection<T> entities)
         {
             Table.UpdateRange(entities);
             return await Db.SaveChangesAsync() > 0;
@@ -76,7 +76,7 @@ namespace Repository.BaseRepository
         #endregion
 
         #region AddOrUpdate
-        public bool AddOrUpdate(Expression<Func<T, object>> identifier, ICollection<T> entityCollections)
+        public virtual bool AddOrUpdate(Expression<Func<T, object>> identifier, ICollection<T> entityCollections)
         {
             var result = false;
             foreach (var entity in entityCollections)
@@ -88,7 +88,7 @@ namespace Repository.BaseRepository
             return result;
         }
 
-        public async Task<bool> AddOrUpdateAsync(Expression<Func<T, object>> identifier, ICollection<T> entityCollections)
+        public virtual async Task<bool> AddOrUpdateAsync(Expression<Func<T, object>> identifier, ICollection<T> entityCollections)
         {
             var result = false;
             foreach (var entity in entityCollections)
@@ -149,7 +149,7 @@ namespace Repository.BaseRepository
 
         }
 
-        public async Task<bool> RemoveAsync(T entity, bool isRemove)
+        public virtual async Task<bool> RemoveAsync(T entity, bool isRemove)
         {
             if (entity == null) { return false; }
             if (isRemove)
@@ -164,7 +164,7 @@ namespace Repository.BaseRepository
             return false;
         }
 
-        public bool RemoveRange(ICollection<T> entities, bool isRemove)
+        public virtual bool RemoveRange(ICollection<T> entities, bool isRemove)
         {
             if (entities == null || entities.Count <= 0) return false;
             if (isRemove)
@@ -181,7 +181,7 @@ namespace Repository.BaseRepository
             return isDeleted;
         }
 
-        public async Task<bool> RemoveRangeAsync(ICollection<T> entities, bool isRemove)
+        public virtual async Task<bool> RemoveRangeAsync(ICollection<T> entities, bool isRemove)
         {
             if (entities == null || entities.Count <= 0) return false;
             if (isRemove)
@@ -252,12 +252,12 @@ namespace Repository.BaseRepository
             return result;
         }
 
-        public async Task<ICollection<T>> GetAsync(Expression<Func<T, bool>> predicate, bool isTracking = true)
+        public virtual async Task<ICollection<T>> GetAsync(Expression<Func<T, bool>> predicate, bool isTracking = true)
         {
             return await (isTracking ? Table.Where(predicate).ToListAsync() : Table.Where(predicate).AsNoTracking().ToListAsync());
         }
 
-        public async Task<ICollection<T>> GetAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
+        public virtual async Task<ICollection<T>> GetAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
         {
             if (includes == null || !includes.Any())
             {
@@ -268,7 +268,7 @@ namespace Repository.BaseRepository
             return result;
         }
 
-        public async Task<ICollection<T>> GetAsync(Expression<Func<T, bool>> predicate, bool isTracking = true, params Expression<Func<T, object>>[] includes)
+        public virtual async Task<ICollection<T>> GetAsync(Expression<Func<T, bool>> predicate, bool isTracking = true, params Expression<Func<T, object>>[] includes)
         {
             if (includes == null || !includes.Any())
             {
@@ -285,12 +285,12 @@ namespace Repository.BaseRepository
 
         #region GetFirstOrDefault
 
-        public T GetFirstOrDefault(Expression<Func<T, bool>> predicate, bool isTracking = true)
+        public virtual T GetFirstOrDefault(Expression<Func<T, bool>> predicate, bool isTracking = true)
         {
             return isTracking ? Table.FirstOrDefault(predicate) : Table.AsNoTracking().FirstOrDefault(predicate);
         }
 
-        public T GetFirstOrDefault(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
+        public virtual T GetFirstOrDefault(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
         {
             if (includes == null || !includes.Any())
             {
@@ -302,7 +302,7 @@ namespace Repository.BaseRepository
             return result;
         }
 
-        public T GetFirstOrDefault(Expression<Func<T, bool>> predicate, bool isTracking = true, params Expression<Func<T, object>>[] includes)
+        public virtual T GetFirstOrDefault(Expression<Func<T, bool>> predicate, bool isTracking = true, params Expression<Func<T, object>>[] includes)
         {
             if (includes == null || !includes.Any())
             {
@@ -312,12 +312,12 @@ namespace Repository.BaseRepository
             return result;
         }
 
-        public async Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>> predicate, bool isTracking = true)
+        public virtual async Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>> predicate, bool isTracking = true)
         {
             return await (isTracking ? Table.FirstOrDefaultAsync(predicate) : Table.AsNoTracking().FirstOrDefaultAsync(predicate));
         }
 
-        public async Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
+        public virtual async Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
         {
             if (includes == null || !includes.Any())
             {
@@ -328,7 +328,7 @@ namespace Repository.BaseRepository
             return result;
         }
 
-        public async Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>> predicate, bool isTracking = true, params Expression<Func<T, object>>[] includes)
+        public virtual async Task<T> GetFirstOrDefaultAsync(Expression<Func<T, bool>> predicate, bool isTracking = true, params Expression<Func<T, object>>[] includes)
         {
             if (includes == null || !includes.Any())
             {
@@ -342,13 +342,13 @@ namespace Repository.BaseRepository
         #endregion
 
         #region GetLastOrDefault
-        public T GetLastOrDefault(Expression<Func<T, bool>> predicate, bool isTracking = true)
+        public virtual T GetLastOrDefault(Expression<Func<T, bool>> predicate, bool isTracking = true)
         {
             var result = isTracking ? Table.Where(predicate).OrderByDescending(c => c.Id).FirstOrDefault() : Table.Where(predicate).OrderByDescending(c => c.Id).AsNoTracking().FirstOrDefault();
             return result;
         }
 
-        public T GetLastOrDefault(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
+        public virtual T GetLastOrDefault(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
         {
             if (includes == null || !includes.Any())
             {
@@ -359,7 +359,7 @@ namespace Repository.BaseRepository
             return result;
         }
 
-        public T GetLastOrDefault(Expression<Func<T, bool>> predicate, bool isTracking = true, params Expression<Func<T, object>>[] includes)
+        public virtual T GetLastOrDefault(Expression<Func<T, bool>> predicate, bool isTracking = true, params Expression<Func<T, object>>[] includes)
         {
             if (includes == null || !includes.Any())
             {
@@ -370,13 +370,13 @@ namespace Repository.BaseRepository
             return result;
         }
 
-        public async Task<T> GetLastOrDefaultAsync(Expression<Func<T, bool>> predicate, bool isTracking = true)
+        public virtual async Task<T> GetLastOrDefaultAsync(Expression<Func<T, bool>> predicate, bool isTracking = true)
         {
             var result = await (isTracking ? Table.Where(predicate).OrderByDescending(c => c.Id).LastOrDefaultAsync() : Table.Where(predicate).OrderByDescending(c => c.Id).AsNoTracking().LastOrDefaultAsync());
             return result;
         }
 
-        public async Task<T> GetLastOrDefaultAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
+        public virtual async Task<T> GetLastOrDefaultAsync(Expression<Func<T, bool>> predicate, params Expression<Func<T, object>>[] includes)
         {
             if (includes == null || !includes.Any())
             {
@@ -386,7 +386,7 @@ namespace Repository.BaseRepository
             return result;
         }
 
-        public async Task<T> GetLastOrDefaultAsync(Expression<Func<T, bool>> predicate, bool isTracking = true, params Expression<Func<T, object>>[] includes)
+        public virtual async Task<T> GetLastOrDefaultAsync(Expression<Func<T, bool>> predicate, bool isTracking = true, params Expression<Func<T, object>>[] includes)
         {
             if (includes == null || !includes.Any())
             {
@@ -403,12 +403,12 @@ namespace Repository.BaseRepository
 
         #region GetDeleted
 
-        public ICollection<T> GetDeleted(Expression<Func<T, bool>> predicate, bool isTracking = true)
+        public virtual ICollection<T> GetDeleted(Expression<Func<T, bool>> predicate, bool isTracking = true)
         {
             return isTracking ? Table.Where(predicate).IgnoreQueryFilters().ToList() : Table.Where(predicate).IgnoreQueryFilters().AsNoTracking().ToList();
         }
 
-        public async Task<List<T>> GetDeletedAsync(Expression<Func<T, bool>> predicate, bool isTracking = true)
+        public virtual async Task<List<T>> GetDeletedAsync(Expression<Func<T, bool>> predicate, bool isTracking = true)
         {
             return await (isTracking ? Table.Where(predicate).IgnoreQueryFilters().ToListAsync() : Table.Where(predicate).IgnoreQueryFilters().AsNoTracking().ToListAsync());
 
