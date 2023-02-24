@@ -19,6 +19,8 @@ namespace Repository.BaseRepository
 
         public DbSet<T> Table => Db.Set<T>();
 
+        #region Add
+
         public virtual bool Add(T entity)
         {
             Table.Add(entity);
@@ -43,6 +45,9 @@ namespace Repository.BaseRepository
             return await Db.SaveChangesAsync() > 0;
         }
 
+        #endregion
+
+        #region Update
         public virtual bool Update(T entity)
         {
             Db.Entry(entity).State = EntityState.Modified;
@@ -67,6 +72,10 @@ namespace Repository.BaseRepository
             return await Db.SaveChangesAsync() > 0;
         }
 
+
+        #endregion
+
+        #region AddOrUpdate
         public bool AddOrUpdate(Expression<Func<T, object>> identifier, ICollection<T> entityCollections)
         {
             var result = false;
@@ -78,6 +87,19 @@ namespace Repository.BaseRepository
             result = Db.SaveChanges() > 0;
             return result;
         }
+
+        public async Task<bool> AddOrUpdateAsync(Expression<Func<T, object>> identifier, ICollection<T> entityCollections)
+        {
+            var result = false;
+            foreach (var entity in entityCollections)
+            {
+                result = AddOrUpdate(entity);
+            }
+
+            result = await Db.SaveChangesAsync() > 0;
+            return result;
+        }
+
         private bool AddOrUpdate(T entity)
         {
             var entityEntry = Db.Entry(entity);
@@ -107,6 +129,10 @@ namespace Repository.BaseRepository
 
             return Db.SaveChanges() > 0;
         }
+
+        #endregion
+
+        #region Delete
         public virtual bool Remove(T entity, bool isRemove)
         {
             if (entity == null) { return false; }
@@ -121,6 +147,21 @@ namespace Repository.BaseRepository
 
             return false;
 
+        }
+
+        public async Task<bool> RemoveAsync(T entity, bool isRemove)
+        {
+            if (entity == null) { return false; }
+            if (isRemove)
+            { Table.Remove(entity); return await Db.SaveChangesAsync() > 0; }
+
+            if (entity is IDelete model)
+            {
+                model.IsDelete = true;
+                await UpdateAsync(entity);
+            }
+
+            return false;
         }
 
         public bool RemoveRange(ICollection<T> entities, bool isRemove)
@@ -140,17 +181,40 @@ namespace Repository.BaseRepository
             return isDeleted;
         }
 
+        public async Task<bool> RemoveRangeAsync(ICollection<T> entities, bool isRemove)
+        {
+            if (entities == null || entities.Count <= 0) return false;
+            if (isRemove)
+            {
+                Table.RemoveRange(entities);
+            }
+
+            foreach (var entity in entities)
+            {
+                if (entity is IDelete model) model.IsDelete = true;
+            }
+
+            var isDeleted = await UpdateRangeAsync(entities);
+            return isDeleted;
+        }
+
+
+        #endregion
+
+        #region GetById
         public virtual T GetById(int id)
         {
             return Table.FirstOrDefault(c => c.Id == id);
 
         }
-
         public virtual async Task<T> GetByIdAsync(int id)
         {
             return await Table.FirstOrDefaultAsync(c => c.Id == id);
         }
 
+        #endregion
+
+        #region GetAll
         public virtual ICollection<T> GetAll()
         {
             return Table.ToList();
@@ -216,6 +280,11 @@ namespace Repository.BaseRepository
             return result;
         }
 
+
+        #endregion
+
+        #region GetFirstOrDefault
+
         public T GetFirstOrDefault(Expression<Func<T, bool>> predicate, bool isTracking = true)
         {
             return isTracking ? Table.FirstOrDefault(predicate) : Table.AsNoTracking().FirstOrDefault(predicate);
@@ -270,6 +339,9 @@ namespace Repository.BaseRepository
             return result;
         }
 
+        #endregion
+
+        #region GetLastOrDefault
         public T GetLastOrDefault(Expression<Func<T, bool>> predicate, bool isTracking = true)
         {
             var result = isTracking ? Table.Where(predicate).OrderByDescending(c => c.Id).FirstOrDefault() : Table.Where(predicate).OrderByDescending(c => c.Id).AsNoTracking().FirstOrDefault();
@@ -326,6 +398,11 @@ namespace Repository.BaseRepository
             return result;
         }
 
+
+        #endregion
+
+        #region GetDeleted
+
         public ICollection<T> GetDeleted(Expression<Func<T, bool>> predicate, bool isTracking = true)
         {
             return isTracking ? Table.Where(predicate).IgnoreQueryFilters().ToList() : Table.Where(predicate).IgnoreQueryFilters().AsNoTracking().ToList();
@@ -336,6 +413,9 @@ namespace Repository.BaseRepository
             return await (isTracking ? Table.Where(predicate).IgnoreQueryFilters().ToListAsync() : Table.Where(predicate).IgnoreQueryFilters().AsNoTracking().ToListAsync());
 
         }
+
+        #endregion
+
 
 
         public virtual void Dispose()
