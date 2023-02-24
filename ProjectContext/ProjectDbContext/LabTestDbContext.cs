@@ -12,6 +12,8 @@ namespace ProjectContext.ProjectDbContext
             _context = context;
         }
         public DbSet<ExpenseItem> ExpenseItems { get; set; }
+        public DbSet<Expense> Expenses { get; set; }
+        public DbSet<ExpenseDetail> ExpenseDetails { get; set; }
 
 
         #region Model API Config

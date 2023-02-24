@@ -1,43 +1,33 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Model.EntityModels.ExpenseModels;
-using ProjectContext.ProjectDbContext;
-using System.Linq;
+using Model.DtoModels.ExpenseDtoModels;
+using Service.IServices.IExpenseServices;
 using System.Threading.Tasks;
 
 namespace Lab_Test.Controllers.ExpenseControllers
 {
     public class ExpenseItemController : Controller
     {
-        private readonly LabTestDbContext _context;
+        private readonly IExpenseItemService _iService;
 
-        public ExpenseItemController(LabTestDbContext context)
+        public ExpenseItemController(IExpenseItemService iService)
         {
-            _context = context;
+            _iService = iService;
         }
 
         // GET: ExpenseItem
         public async Task<IActionResult> Index()
         {
-            return View(await _context.ExpenseItems.ToListAsync());
+            var data = await _iService.GetAllAsync();
+            return View(data);
         }
 
         // GET: ExpenseItem/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var expenseItem = await _context.ExpenseItems
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (expenseItem == null)
-            {
-                return NotFound();
-            }
-
-            return View(expenseItem);
+            if (id == null) return NotFound();
+            var data = await _iService.GetByIdAsync(id ?? 0);
+            if (data == null) return NotFound();
+            return View(data);
         }
 
         // GET: ExpenseItem/Create
@@ -51,31 +41,23 @@ namespace Lab_Test.Controllers.ExpenseControllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,UnitPrice,Description")] ExpenseItem expenseItem)
+        public async Task<IActionResult> Create(ExpenseItemDto dto)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(expenseItem);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(expenseItem);
+            if (!ModelState.IsValid) return null;
+            var result = await _iService.AddAsync(dto);
+            if (result) return RedirectToAction(nameof(Index));
+            return View(dto);
         }
 
         // GET: ExpenseItem/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var expenseItem = await _context.ExpenseItems.FindAsync(id);
-            if (expenseItem == null)
-            {
-                return NotFound();
-            }
-            return View(expenseItem);
+            var data = await _iService.GetByIdAsync(id ?? 0);
+            if (data == null) return NotFound();
+
+            return View(data);
         }
 
         // POST: ExpenseItem/Edit/5
@@ -83,52 +65,24 @@ namespace Lab_Test.Controllers.ExpenseControllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,UnitPrice,Description")] ExpenseItem expenseItem)
+        public async Task<IActionResult> Edit(int id, ExpenseItemDto dto)
         {
-            if (id != expenseItem.Id)
-            {
-                return NotFound();
-            }
+            if (id != dto.Id) return NotFound();
+            if (!ModelState.IsValid) return null;
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(expenseItem);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ExpenseItemExists(expenseItem.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(expenseItem);
+            var result = await _iService.UpdateAsync(dto);
+            if (result) return RedirectToAction(nameof(Index));
+            return View(dto);
         }
 
         // GET: ExpenseItem/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var expenseItem = await _context.ExpenseItems
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (expenseItem == null)
-            {
-                return NotFound();
-            }
-
-            return View(expenseItem);
+            var data = await _iService.GetByIdAsync(id ?? 0);
+            if (data == null) return NotFound();
+            return View(data);
         }
 
         // POST: ExpenseItem/Delete/5
@@ -136,15 +90,19 @@ namespace Lab_Test.Controllers.ExpenseControllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var expenseItem = await _context.ExpenseItems.FindAsync(id);
-            _context.ExpenseItems.Remove(expenseItem);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            var result = await _iService.DeleteAsync(id);
+            if (result) return RedirectToAction(nameof(Index));
+
+            var data = await _iService.GetByIdAsync(id);
+            return View(data);
         }
 
-        private bool ExpenseItemExists(int id)
-        {
-            return _context.ExpenseItems.Any(e => e.Id == id);
-        }
+        // [HttpGet("IsExpenseItemNameExist", Name = "IsExpenseItemNameExist")]
+        // public async Task<IActionResult> IsExpItemCategoryNameExistAsync(string name, long id = 0)
+        // {
+        //     if (string.IsNullOrEmpty(name) && string.IsNullOrWhiteSpace(name)) return BadRequest("Sorry, No Name Found!");
+        //     var data = id > 0 ? await _iService.IsExistsAsync(c => c.Name.Equals(name) && c.Id != id) : await _iService.IsExistsAsync(c => c.Name.Equals(name));
+        //     return Ok(data);
+        // }
     }
 }
