@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
+using Model.DataTableModels;
 using Model.DtoModels.ExpenseDtoModels;
 using Service.IServices.IExpenseServices;
 using System.Threading.Tasks;
-using Model.DataTableModels;
 
 namespace Lab_Test.Controllers.ExpenseControllers
 {
@@ -77,13 +76,15 @@ namespace Lab_Test.Controllers.ExpenseControllers
             return View(dto);
         }
 
-        [HttpPost("Search")]
-        public async Task<IActionResult> Search(DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto> searchVm = null)
+        // [HttpGet("Search")]
+        // public async Task<IActionResult> Search(DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto> searchVm = null)
+        public async Task<IActionResult> Search()
         {
-            searchVm ??= new DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto>();
+            // searchVm ??= new DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto>();
+            DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto> searchVm = new DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto>();
             if (searchVm?.SearchModel == null) searchVm.SearchModel = new ExpenseItemSearchDto();
             var dataTable = await _iService.Search(searchVm);
-            
+
             return Ok(dataTable);
         }
 
