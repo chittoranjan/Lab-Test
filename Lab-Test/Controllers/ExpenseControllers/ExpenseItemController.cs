@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Mvc;
 using Model.DataTableModels;
 using Model.DtoModels.ExpenseDtoModels;
-using NToastNotify;
 using Service.IServices.IExpenseServices;
 using System.Threading.Tasks;
 
@@ -10,28 +10,24 @@ namespace Lab_Test.Controllers.ExpenseControllers
     public class ExpenseItemController : Controller
     {
         private readonly IExpenseItemService _iService;
-        private readonly IToastNotification _toastNotification;
-        public ExpenseItemController(IExpenseItemService iService, IToastNotification toastNotification)
+        public INotyfService NotifyService { get; }
+        public ExpenseItemController(IExpenseItemService iService, INotyfService notifyService)
         {
             _iService = iService;
-            _toastNotification = toastNotification;
+            NotifyService = notifyService;
         }
 
         // GET: ExpenseItem
         public async Task<IActionResult> Index()
         {
             var data = await _iService.GetAllAsync();
-            // Success Toast
-            _toastNotification.AddSuccessToastMessage("Woo hoo - it works!");
-
-            // Info Toast
-            _toastNotification.AddInfoToastMessage("Here is some information.");
-
-            // Error Toast
-            _toastNotification.AddErrorToastMessage("Woops an error occured.");
-
-            // Warning Toast
-            _toastNotification.AddWarningToastMessage("Here is a simple warning!");
+            NotifyService.Success("This is a Success Notification");
+            NotifyService.Error("This is an Error Notification");
+            NotifyService.Warning("This is a Warning Notification");
+            NotifyService.Information("This is an Information Notification");
+            // _notifyService.Success("This toast will be dismissed in 10 seconds.", 10);
+            // _notifyService.Custom("Custom Notification - closes in 5 seconds.", 5, "whitesmoke", "fa fa-gear");
+            // _notifyService.Custom("Custom Notification - closes in 5 seconds.", 10, "#135224", "fa fa-gear");
             return View(data);
         }
 
