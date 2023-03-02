@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Model.DataTableModels;
 using Model.DtoModels.ExpenseDtoModels;
+using NToastNotify;
 using Service.IServices.IExpenseServices;
 using System.Threading.Tasks;
 
@@ -9,16 +10,28 @@ namespace Lab_Test.Controllers.ExpenseControllers
     public class ExpenseItemController : Controller
     {
         private readonly IExpenseItemService _iService;
-
-        public ExpenseItemController(IExpenseItemService iService)
+        private readonly IToastNotification _toastNotification;
+        public ExpenseItemController(IExpenseItemService iService, IToastNotification toastNotification)
         {
             _iService = iService;
+            _toastNotification = toastNotification;
         }
 
         // GET: ExpenseItem
         public async Task<IActionResult> Index()
         {
             var data = await _iService.GetAllAsync();
+            // Success Toast
+            _toastNotification.AddSuccessToastMessage("Woo hoo - it works!");
+
+            // Info Toast
+            _toastNotification.AddInfoToastMessage("Here is some information.");
+
+            // Error Toast
+            _toastNotification.AddErrorToastMessage("Woops an error occured.");
+
+            // Warning Toast
+            _toastNotification.AddWarningToastMessage("Here is a simple warning!");
             return View(data);
         }
 

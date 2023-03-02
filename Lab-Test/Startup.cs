@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NToastNotify;
 using ProjectContext.ProjectDbContext;
 using Resolver.DependencyResolver;
 
@@ -23,9 +24,10 @@ namespace Lab_Test
         {
             services.AddControllersWithViews();
             services.AddMvc();
-            services.AddDbContext<LabTestDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("LabTestContext")));
+            services.AddDbContext<LabTestDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LabTestContext")));
             new DependencyResolverProfile().ConfigServiceMap(services);
+            services.AddRazorPages().AddNToastNotifyNoty(new NotyOptions {ProgressBar = true, Timeout = 5000});
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,6 +49,7 @@ namespace Lab_Test
             app.UseRouting();
 
             app.UseAuthorization();
+            app.UseNToastNotify();
 
             app.UseEndpoints(endpoints =>
             {
