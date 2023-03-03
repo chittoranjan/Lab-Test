@@ -21,13 +21,6 @@ namespace Lab_Test.Controllers.ExpenseControllers
         public async Task<IActionResult> Index()
         {
             var data = await _iService.GetAllAsync();
-            NotifyService.Success("This is a Success Notification");
-            NotifyService.Error("This is an Error Notification");
-            NotifyService.Warning("This is a Warning Notification");
-            NotifyService.Information("This is an Information Notification");
-            // _notifyService.Success("This toast will be dismissed in 10 seconds.", 10);
-            // _notifyService.Custom("Custom Notification - closes in 5 seconds.", 5, "whitesmoke", "fa fa-gear");
-            // _notifyService.Custom("Custom Notification - closes in 5 seconds.", 10, "#135224", "fa fa-gear");
             return View(data);
         }
 
@@ -55,8 +48,10 @@ namespace Lab_Test.Controllers.ExpenseControllers
         {
             if (!ModelState.IsValid) return null;
             var result = await _iService.AddAsync(dto);
-            if (result) return RedirectToAction(nameof(Index));
-            return View(dto);
+
+            if (!result) return View(dto);
+            NotifyService.Success("Expense item successfully saved!");
+            return RedirectToAction(nameof(Index));
         }
 
         // GET: ExpenseItem/Edit/5
@@ -81,8 +76,10 @@ namespace Lab_Test.Controllers.ExpenseControllers
             if (!ModelState.IsValid) return null;
 
             var result = await _iService.UpdateAsync(dto);
-            if (result) return RedirectToAction(nameof(Index));
-            return View(dto);
+
+            if (!result) return View(dto);
+            NotifyService.Information("Expense item successfully updated!");
+            return RedirectToAction(nameof(Index));
         }
 
         // [HttpGet("Search")]
@@ -113,7 +110,11 @@ namespace Lab_Test.Controllers.ExpenseControllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var result = await _iService.DeleteAsync(id);
-            if (result) return RedirectToAction(nameof(Index));
+            if (result)
+            {
+                NotifyService.Error("Expense item successfully deleted!");
+                return RedirectToAction(nameof(Index));
+            }
 
             var data = await _iService.GetByIdAsync(id);
             return View(data);
