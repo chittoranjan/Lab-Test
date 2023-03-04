@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "//munvArNE5+rAZSUWXGx677gKKcbBXtq9Dps2as0LlViBeXXr72l1BC0g322WaQFeYGtRP0WCUXupj+Y9UGoA==",
+  "dgSpecHash": "/Nw5e68PtBseYw19/Gybi46LhA397W/uICY3TZd2d8gI+mmyOmu/I6YBonIvbmGar3wCsKYbL3xlm/N6IXElPw==",
   "success": true,
   "projectFilePath": "G:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj",
   "expectedPackageFiles": [
@@ -9,6 +9,7 @@
     "C:\\Users\\chitt\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\chitt\\.nuget\\packages\\azure.core\\1.24.0\\azure.core.1.24.0.nupkg.sha512",
     "C:\\Users\\chitt\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
+    "C:\\Users\\chitt\\.nuget\\packages\\fontawesome\\4.7.0\\fontawesome.4.7.0.nupkg.sha512",
     "C:\\Users\\chitt\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\chitt\\.nuget\\packages\\microsoft.aspnetcore.http.features\\5.0.17\\microsoft.aspnetcore.http.features.5.0.17.nupkg.sha512",
     "C:\\Users\\chitt\\.nuget\\packages\\microsoft.aspnetcore.razor.language\\6.0.11\\microsoft.aspnetcore.razor.language.6.0.11.nupkg.sha512",

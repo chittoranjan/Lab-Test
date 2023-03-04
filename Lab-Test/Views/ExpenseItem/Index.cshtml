@@ -54,9 +54,12 @@
                                     @Html.DisplayFor(modelItem => item.Description)
                                 </td>
                                 <td>
-                                    <a asp-action="Edit" asp-route-id="@item.Id"><input type="button" title="Edit" value="Edit" class="btn btn-outline-primary btn-sm btn-width"/></a>
-                                    <a asp-action="Details" asp-route-id="@item.Id"><input type="button" title="Details" value="Details" class="btn btn-outline-info btn-sm btn-width" /></a>
-                                    <a asp-action="Delete" asp-route-id="@item.Id"><input type="button" value="Delete" title="Delete" class="btn btn-outline-danger btn-sm btn-width" /></a>
+                                    <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-pencil text-warning m-1" title="Edit" aria-hidden="true"></i></a>
+                                    <a asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-eye text-info m-1" title="Details" aria-hidden="true"></i></a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash-o text-danger m-1" title="Delete" aria-hidden="true"></i></a>
+                                    @* <a asp-action="Edit" asp-route-id="@item.Id"><input type="button" title="Edit" value="Edit" class="btn btn-outline-primary btn-sm btn-width"/></a> *@
+                                    @* <a asp-action="Details" asp-route-id="@item.Id"><input type="button" title="Details" value="Details" class="btn btn-outline-info btn-sm btn-width" /></a> *@
+                                    @* <a asp-action="Delete" asp-route-id="@item.Id"><input type="button" value="Delete" title="Delete" class="btn btn-outline-danger btn-sm btn-width" /></a> *@
                                 </td>
                             </tr>
                             sl++;
