@@ -6,8 +6,13 @@ using Microsoft.AspNetCore.Http;
 
 namespace Resolver.Utilities
 {
-    public static class Utility
+    public static class AppUtility
     {
+        public static string NullToDash(string value)
+        {
+            if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value)) return "--";
+            return "--";
+        }
         public static FilePathModel GetFileUrl(IFormFile file)
         {
             var folderName = Path.Combine("Resources", "Test");
