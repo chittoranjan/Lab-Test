@@ -1,4 +1,5 @@
-﻿using AspNetCoreHero.ToastNotification.Abstractions;
+﻿using System.Linq;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Model.DataTableModels;
 using Model.DtoModels.ExpenseDtoModels;
@@ -9,6 +10,7 @@ namespace Lab_Test.Controllers.ExpenseControllers
 {
     public class ExpenseItemController : Controller
     {
+        #region Config
         private readonly IExpenseItemService _iService;
         public INotyfService NotifyService { get; }
         public ExpenseItemController(IExpenseItemService iService, INotyfService notifyService)
@@ -16,15 +18,17 @@ namespace Lab_Test.Controllers.ExpenseControllers
             _iService = iService;
             NotifyService = notifyService;
         }
+        #endregion
 
-        // GET: ExpenseItem
-        public async Task<IActionResult> Index()
-        {
-            var data = await _iService.GetAllAsync();
-            return View(data);
-        }
+        #region Get
+        // public async Task<IActionResult> Index()
+        // {
+        //     var data = await _iService.GetAllAsync();
+        //     return View(data);
+        // }
+        #endregion
 
-        // GET: ExpenseItem/Details/5
+        #region Details
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
@@ -32,16 +36,14 @@ namespace Lab_Test.Controllers.ExpenseControllers
             if (data == null) return NotFound();
             return View(data);
         }
+        #endregion
 
-        // GET: ExpenseItem/Create
+        #region Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: ExpenseItem/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(ExpenseItemDto dto)
@@ -51,10 +53,11 @@ namespace Lab_Test.Controllers.ExpenseControllers
 
             if (!result) return View(dto);
             NotifyService.Success("Expense item successfully saved!");
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Search));
         }
+        #endregion
 
-        // GET: ExpenseItem/Edit/5
+        #region Edit
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null) return NotFound();
@@ -65,9 +68,6 @@ namespace Lab_Test.Controllers.ExpenseControllers
             return View(data);
         }
 
-        // POST: ExpenseItem/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, ExpenseItemDto dto)
@@ -79,22 +79,35 @@ namespace Lab_Test.Controllers.ExpenseControllers
 
             if (!result) return View(dto);
             NotifyService.Information("Expense item successfully updated!");
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Search));
         }
+        #endregion
 
-        // [HttpGet("Search")]
-        // public async Task<IActionResult> Search(DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto> searchVm = null)
+        #region Search
+        [HttpGet("ExpenseItem/Search")]
         public async Task<IActionResult> Search()
         {
-            // searchVm ??= new DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto>();
             DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto> searchVm = new DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto>();
+            if (searchVm?.SearchModel == null) searchVm.SearchModel = new ExpenseItemSearchDto();
+            var dataTable = await _iService.Search(searchVm);
+            var data = dataTable.DataList;
+            return View(data);
+            //var data = new ExpenseItemSearchDto();
+            //return Task.FromResult<IActionResult>(View(data));
+        }
+
+        [HttpPost("ExpenseItem/SearchSearch")]
+        public async Task<IActionResult> Search(DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto> searchVm = null)
+        {
+            searchVm ??= new DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto>();
             if (searchVm?.SearchModel == null) searchVm.SearchModel = new ExpenseItemSearchDto();
             var dataTable = await _iService.Search(searchVm);
 
             return Ok(dataTable);
         }
+        #endregion
 
-        // GET: ExpenseItem/Delete/5
+        #region Delete
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -104,7 +117,6 @@ namespace Lab_Test.Controllers.ExpenseControllers
             return View(data);
         }
 
-        // POST: ExpenseItem/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
@@ -113,12 +125,13 @@ namespace Lab_Test.Controllers.ExpenseControllers
             if (result)
             {
                 NotifyService.Error("Expense item successfully deleted!");
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Search));
             }
 
             var data = await _iService.GetByIdAsync(id);
             return View(data);
         }
+        #endregion
 
         // [HttpGet("IsExpenseItemNameExist", Name = "IsExpenseItemNameExist")]
         // public async Task<IActionResult> IsExpItemCategoryNameExistAsync(string name, long id = 0)

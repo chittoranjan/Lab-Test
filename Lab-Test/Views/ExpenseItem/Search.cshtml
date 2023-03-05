@@ -1,0 +1,79 @@
+﻿@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model IEnumerable<Model.DtoModels.ExpenseDtoModels.ExpenseItemSearchDto>
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header bg-primary text-white text-left">
+            <h6>Expense Item List</h6>
+        </div>
+        <div class="card-body pt-2">
+            <div class="row pb-2">
+                <a asp-action="Create"><input type="button" value="Create" class="btn btn-success btn-width" /></a>
+            </div>
+            <div class="row">
+                <div class="table-responsive">
+                    <table id="ExpenseItemSearchTable" class="table table-bordered">
+                        <thead class="thead-light">
+                        <tr>
+                            <th>
+                                #Sl
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Name)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.UnitPrice)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Description)
+                            </th>
+                            <th>
+                                Action
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        @{
+                            var sl = 1;
+                        }
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <span>@sl</span>
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.UnitPrice)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Description)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-pencil text-warning m-1" title="Edit" aria-hidden="true"></i></a>
+                                    <a asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-eye text-info m-1" title="Details" aria-hidden="true"></i></a>
+                                    <a asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash-o text-danger m-1" title="Delete" aria-hidden="true"></i></a>
+                                    @* <a asp-action="Edit" asp-route-id="@item.Id"><input type="button" title="Edit" value="Edit" class="btn btn-outline-primary btn-sm btn-width"/></a> *@
+                                    @* <a asp-action="Details" asp-route-id="@item.Id"><input type="button" title="Details" value="Details" class="btn btn-outline-info btn-sm btn-width" /></a> *@
+                                    @* <a asp-action="Delete" asp-route-id="@item.Id"><input type="button" value="Delete" title="Delete" class="btn btn-outline-danger btn-sm btn-width" /></a> *@
+                                </td>
+                            </tr>
+                            sl++;
+                        }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/js/ExpenseItem/ExpenseItemSearch.js"></script>
+}
