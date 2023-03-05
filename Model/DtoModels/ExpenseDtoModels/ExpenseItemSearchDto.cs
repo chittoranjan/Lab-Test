@@ -1,6 +1,5 @@
-﻿using System.ComponentModel;
-using Model.DataTableModels;
-using System.ComponentModel.DataAnnotations;
+﻿using Model.DataTableModels;
+using System.ComponentModel;
 
 namespace Model.DtoModels.ExpenseDtoModels
 {

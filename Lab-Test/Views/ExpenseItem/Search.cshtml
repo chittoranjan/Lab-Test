@@ -2,7 +2,7 @@
 @model Model.DtoModels.ExpenseDtoModels.ExpenseItemSearchDto
 
 @{
-    ViewData["Title"] = "Search";
+    ViewData["Title"] = "GlobalSearch";
 }
 
 <div class="container-fluid">
@@ -20,7 +20,7 @@
                         <thead class="thead-light">
                         <tr>
                             <th>
-                                #Sl
+                                @Html.DisplayNameFor(model => model.SerialNo)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Name)

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
-using Model.DataTableModels;
+using Model.DataTablePaginationModels;
 using Model.DtoModels.ExpenseDtoModels;
 using Model.EntityModels.ExpenseModels;
 using ProjectContext.ProjectDbContext;
@@ -21,12 +21,12 @@ namespace Repository.Repositories.ExpenseRepositories
             _iMapper = iMapper;
         }
 
-        public async Task<DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto>> Search(DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto> searchDto)
+        public async Task<DataTablePagination<ExpenseItemSearchDto>> Search(DataTablePagination<ExpenseItemSearchDto> searchDto)
         {
             var searchResult = Context.ExpenseItems.AsNoTracking();
 
-            var searchModel = searchDto.SearchModel;
-            var filter = !string.IsNullOrEmpty(searchDto?.Filter) ? searchDto?.Filter?.Trim() : searchDto.Filter?.Trim();
+            var searchModel = searchDto.SearchVm;
+            var filter = searchDto?.Search?.Value?.Trim();
 
             if (!string.IsNullOrEmpty(filter))
             {
@@ -35,18 +35,23 @@ namespace Repository.Repositories.ExpenseRepositories
                     c.Name.ToLower().Contains(filter)
                     || c.Description.ToLower().Contains(filter)
                 );
-
             }
 
+            var pageSize = searchDto.Length ?? 0;
+            var skip = searchDto.Start ?? 0;
+
             var totalRecords = await searchResult.CountAsync();
-            searchDto.TotalItemsCount = totalRecords;
             if (totalRecords <= 0) return searchDto;
 
-            var filteredDataList = await searchResult.OrderByDescending(c => c.Id).Skip(searchDto.StartPoint).Take(searchDto.ItemsPerPage).ToListAsync();
-            searchDto.DataList = _iMapper.Map<List<ExpenseItemSearchDto>>(filteredDataList);
-            var sl = searchDto.StartPoint;
+            searchDto.RecordsTotal = totalRecords;
+            searchDto.RecordsFiltered = totalRecords;
+          
+            var filteredDataList = await searchResult.OrderByDescending(c => c.Id).Skip(skip).Take(pageSize).ToListAsync();
 
-            foreach (var searchResultDto in searchDto.DataList)
+            searchDto.Data = _iMapper.Map<List<ExpenseItemSearchDto>>(filteredDataList);
+            var sl = searchDto.Start ?? 0;
+
+            foreach (var searchResultDto in searchDto.Data)
             {
                 searchResultDto.SerialNo = ++sl;
             }

@@ -1,7 +1,6 @@
-﻿using System.Linq;
-using AspNetCoreHero.ToastNotification.Abstractions;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
-using Model.DataTableModels;
+using Model.DataTablePaginationModels;
 using Model.DtoModels.ExpenseDtoModels;
 using Service.IServices.IExpenseServices;
 using System.Threading.Tasks;
@@ -75,24 +74,17 @@ namespace Lab_Test.Controllers.ExpenseControllers
         }
         #endregion
 
-        #region Search
+        #region GlobalSearch
         [HttpGet]
         public Task<IActionResult> Search()
         {
-            //DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto> searchVm = new DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto>();
-            //if (searchVm?.SearchModel == null) searchVm.SearchModel = new ExpenseItemSearchDto();
-            //var dataTable = await _iService.Search(searchVm);
-            //var data = dataTable.DataList;
-            //return View(data);
-            var data = new ExpenseItemSearchDto();
-            return Task.FromResult<IActionResult>(View(data));
+            return Task.FromResult<IActionResult>(View());
         }
 
         [HttpPost]
-        public async Task<IActionResult> Search(DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto> searchVm = null)
+        public async Task<IActionResult> Search(DataTablePagination<ExpenseItemSearchDto> searchVm)
         {
-            searchVm ??= new DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto>();
-            if (searchVm?.SearchModel == null) searchVm.SearchModel = new ExpenseItemSearchDto();
+            searchVm ??= new DataTablePagination<ExpenseItemSearchDto>();
             var dataTable = await _iService.Search(searchVm);
 
             return Json(dataTable);

@@ -6,7 +6,7 @@ using Service.BaseService;
 using Service.IServices.IExpenseServices;
 using System.Threading.Tasks;
 using AutoMapper;
-using Model.DataTableModels;
+using Model.DataTablePaginationModels;
 
 namespace Service.Services.ExpenseServices
 {
@@ -52,7 +52,7 @@ namespace Service.Services.ExpenseServices
             return dto;
         }
 
-        public async Task<DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto>> Search(DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto> searchDto)
+        public async Task<DataTablePagination<ExpenseItemSearchDto>> Search(DataTablePagination<ExpenseItemSearchDto> searchDto)
         {
             var dataTable = await Repository.Search(searchDto);
             return dataTable;
