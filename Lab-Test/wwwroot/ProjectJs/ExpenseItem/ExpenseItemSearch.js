@@ -1,6 +1,7 @@
-﻿$(document).ready(function () {
-    $('#ExpenseItemSearchTable').DataTable();
-   // search();
+﻿var $ = jQuery.noConflict(true);
+$(document).ready(function () {
+    //search();
+    getSearchResult();
 });
 
 function getSearchObject() {
@@ -35,14 +36,14 @@ function search() {
         params = { searchVm: searchVm }
     }
 
-    var oTable = $("#EmployeeSearchTable").DataTable({
+    var oTable = $("#ExpenseItemSearchTable").DataTable({
         "aLengthMenu": [[50, 75, 100, 125, 150, 175, 200], [50, 75, 100, 125, 150, 175, 200]],
         "iDisplayLength": 50,
         "processing": true,
         "serverSide": true,
 
         "ajax": {
-            url: subDirectory + "Employees/GetDataTableJsonData",
+            url: "/ExpenseItem/Search",
             type: "POST",
             data: params
         },
@@ -50,53 +51,9 @@ function search() {
         "columns": [
 
             { "data": "SerialNo" },
-            {
-                "data": "PhotoString",
-
-                "render": function (data) {
-                    if (data != null) {
-
-                        return '<img src="' + data + '"  style="height:50px;width:50px;"/>';
-
-                    } else {
-
-                        return '<img src="../Images/Nopreview-Available.jpg" alt=" Image"  style="height:50px;width:50px;"/>';
-                    }
-
-                }
-            },
-
-            { "data": "CodeWithPrefix" },
-            { "data": "ServiceCenterName" },
-            { "data": "DepartmentName" },
-            { "data": "DesignationName" },
-
-
-            //{
-            //    "data": "FromDate",
-            //    "render": function (data) {
-            //        if (data != null && data != undefined) {
-            //            return convertJsonDateForView(data);
-            //        }
-            //        return "N/ A";
-            //    }
-            //},
-
-            //{
-            //    "data": "ToDate",
-            //    "render": function (data) {
-            //        if (data != null && data != undefined) {
-            //            return convertJsonDateForView(data);
-            //        }
-            //        return "N/ A";
-            //    }
-            //},
-
-            { "data": "FullName" },
-            { "data": "ContactNo" },
-            { "data": "Email" },
-            { "data": "NidNo" },
-
+            { "data": "Name" },
+            { "data": "UnitPrice" },
+            { "data": "Description" },
             {
 
                 "render": function (data, type, item) {
@@ -124,6 +81,33 @@ function search() {
         ]
     });
 
-    scrollDiv("#EmployeeSearchTable");
+    // scrollDiv("#EmployeeSearchTable");
 
+}
+
+function getSearchResult() {
+    var data = [];
+    $.ajax({
+        type: "POST",
+        url: "/ExpenseItem/Search",
+        async: false,
+        success: function (result) {
+            $.each(result.dataList, function (key, value) {
+
+                var editBtn = "<a href='Edit/" + value.id + "'><i class='fa fa-pencil text-warning m-1' title='Edit' aria-hidden='true'></i></a>";
+                var detailsBtn = "<a href='Details/" + value.id + "'><i class='fa fa-eye text-info m-1' title='Details' aria-hidden='true'></i></a>";
+                var deleteBtn = "<a href='Delete/" + value.id + "'><i class='fa fa-trash-o text-danger m-1' title='Delete' aria-hidden='true'></i></a>";
+                var actionBtn = editBtn + detailsBtn + deleteBtn;
+                data.push([
+                    value.serialNo, value.name, value.unitPrice, value.description, actionBtn
+                ]);
+            });
+        },
+        failure: function (err) {
+
+        }
+    });
+    $("#ExpenseItemSearchTable").DataTable({
+        data: data
+    });
 }

@@ -20,14 +20,6 @@ namespace Lab_Test.Controllers.ExpenseControllers
         }
         #endregion
 
-        #region Get
-        // public async Task<IActionResult> Index()
-        // {
-        //     var data = await _iService.GetAllAsync();
-        //     return View(data);
-        // }
-        #endregion
-
         #region Details
         public async Task<IActionResult> Details(int? id)
         {
@@ -84,26 +76,26 @@ namespace Lab_Test.Controllers.ExpenseControllers
         #endregion
 
         #region Search
-        [HttpGet("ExpenseItem/Search")]
-        public async Task<IActionResult> Search()
+        [HttpGet]
+        public Task<IActionResult> Search()
         {
-            DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto> searchVm = new DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto>();
-            if (searchVm?.SearchModel == null) searchVm.SearchModel = new ExpenseItemSearchDto();
-            var dataTable = await _iService.Search(searchVm);
-            var data = dataTable.DataList;
-            return View(data);
-            //var data = new ExpenseItemSearchDto();
-            //return Task.FromResult<IActionResult>(View(data));
+            //DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto> searchVm = new DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto>();
+            //if (searchVm?.SearchModel == null) searchVm.SearchModel = new ExpenseItemSearchDto();
+            //var dataTable = await _iService.Search(searchVm);
+            //var data = dataTable.DataList;
+            //return View(data);
+            var data = new ExpenseItemSearchDto();
+            return Task.FromResult<IActionResult>(View(data));
         }
 
-        [HttpPost("ExpenseItem/SearchSearch")]
+        [HttpPost]
         public async Task<IActionResult> Search(DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto> searchVm = null)
         {
             searchVm ??= new DataTablePagination<ExpenseItemSearchDto, ExpenseItemSearchDto>();
             if (searchVm?.SearchModel == null) searchVm.SearchModel = new ExpenseItemSearchDto();
             var dataTable = await _iService.Search(searchVm);
 
-            return Ok(dataTable);
+            return Json(dataTable);
         }
         #endregion
 

@@ -7,9 +7,13 @@
 
   <ItemGroup>
     <Compile Remove="Views\ExpenseViews\**" />
+    <Compile Remove="wwwroot\DataTables\**" />
     <Content Remove="Views\ExpenseViews\**" />
+    <Content Remove="wwwroot\DataTables\**" />
     <EmbeddedResource Remove="Views\ExpenseViews\**" />
+    <EmbeddedResource Remove="wwwroot\DataTables\**" />
     <None Remove="Views\ExpenseViews\**" />
+    <None Remove="wwwroot\DataTables\**" />
   </ItemGroup>
 
   <ItemGroup>
