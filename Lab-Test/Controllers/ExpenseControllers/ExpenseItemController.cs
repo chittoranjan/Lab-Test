@@ -76,17 +76,15 @@ namespace Lab_Test.Controllers.ExpenseControllers
 
         #region GlobalSearch
         [HttpGet]
-        public Task<IActionResult> Search()
+        public IActionResult Search()
         {
-            return Task.FromResult<IActionResult>(View());
+            return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> Search(DataTablePagination<ExpenseItemSearchDto> searchVm)
+        public async Task<IActionResult> Search(DataTablePagination<ExpenseItemSearchDto> searchDto)
         {
-            searchVm ??= new DataTablePagination<ExpenseItemSearchDto>();
-            var dataTable = await _iService.Search(searchVm);
-
+            var dataTable = await _iService.Search(searchDto);
             return Json(dataTable);
         }
         #endregion

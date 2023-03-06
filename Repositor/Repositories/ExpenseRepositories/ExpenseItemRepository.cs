@@ -47,10 +47,9 @@ namespace Repository.Repositories.ExpenseRepositories
             searchDto.RecordsFiltered = totalRecords;
           
             var filteredDataList = await searchResult.OrderByDescending(c => c.Id).Skip(skip).Take(pageSize).ToListAsync();
-
             searchDto.Data = _iMapper.Map<List<ExpenseItemSearchDto>>(filteredDataList);
-            var sl = searchDto.Start ?? 0;
 
+            var sl = searchDto.Start ?? 0;
             foreach (var searchResultDto in searchDto.Data)
             {
                 searchResultDto.SerialNo = ++sl;

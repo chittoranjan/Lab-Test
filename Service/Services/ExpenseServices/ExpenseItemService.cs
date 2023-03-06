@@ -54,6 +54,7 @@ namespace Service.Services.ExpenseServices
 
         public async Task<DataTablePagination<ExpenseItemSearchDto>> Search(DataTablePagination<ExpenseItemSearchDto> searchDto)
         {
+            searchDto ??= new DataTablePagination<ExpenseItemSearchDto>();
             var dataTable = await Repository.Search(searchDto);
             return dataTable;
         }
