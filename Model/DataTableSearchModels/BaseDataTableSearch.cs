@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace Model.DataTableModels;
+namespace Model.DataTableSearchModels;
 
 public abstract class BaseDataTableSearch : IDataTableSearch
 {
@@ -9,6 +9,7 @@ public abstract class BaseDataTableSearch : IDataTableSearch
 
     [DisplayName("#SL")]
     public int? SerialNo { get; set; }
+    public string Action { get; set; }
     public DateTime? FromDate { get; set; }
     public DateTime? ToDate { get; set; }
 }

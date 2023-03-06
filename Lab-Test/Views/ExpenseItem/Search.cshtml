@@ -2,18 +2,24 @@
 @model Model.DtoModels.ExpenseDtoModels.ExpenseItemSearchDto
 
 @{
-    ViewData["Title"] = "GlobalSearch";
+    ViewData["Title"] = "Search";
 }
 
 <div class="container-fluid">
     <div class="card">
+
         <div class="card-header bg-primary text-white text-left">
-            <h6>Expense Item List</h6>
-        </div>
-        <div class="card-body pt-2">
-            <div class="row pb-2">
-                <a asp-action="Create"><input type="button" value="Create" class="btn btn-success btn-width" /></a>
+            <div class="row">
+                <div class="col-md-6 text-left">
+                    <h6>Expense Item List</h6>
+                </div>
+                <div class="col-md-6 text-right">
+                    <a asp-action="Create"><i class="fa fa-plus text-white" title="Create" aria-hidden="true"></i></a>
+                </div>
             </div>
+        </div>
+
+        <div class="card-body pt-2">
             <div class="row">
                 <div class="table-responsive">
                     <table id="ExpenseItemSearchTable" class="table table-bordered">
@@ -32,37 +38,11 @@
                                 @Html.DisplayNameFor(model => model.Description)
                             </th>
                             <th>
-                                Action
+                                @Html.DisplayNameFor(model => model.Action)
                             </th>
                         </tr>
                         </thead>
                         <tbody>
-                       @* @{
-                            var sl = 1;
-                        }
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    <span>@sl</span>
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.UnitPrice)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Description)
-                                </td>
-                                <td>
-                                    <a asp-action="Edit" asp-route-id="@item.Id"><i class="fa fa-pencil text-warning m-1" title="Edit" aria-hidden="true"></i></a>
-                                    <a asp-action="Details" asp-route-id="@item.Id"><i class="fa fa-eye text-info m-1" title="Details" aria-hidden="true"></i></a>
-                                    <a asp-action="Delete" asp-route-id="@item.Id"><i class="fa fa-trash-o text-danger m-1" title="Delete" aria-hidden="true"></i></a>
-                                </td>
-                            </tr>
-                            sl++;
-                        }*@
                         </tbody>
                     </table>
                 </div>
