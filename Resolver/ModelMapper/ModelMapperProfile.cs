@@ -11,6 +11,8 @@ namespace Resolver.ModelMapper
             #region Expense Models Map
 
             CreateMap<ExpenseItemDto, ExpenseItem>().ReverseMap();
+            CreateMap<ExpenseItem, ExpenseItemSearchDto>();
+
             CreateMap<ExpenseDto, Expense>().ReverseMap();
             CreateMap<ExpenseDetailDto, ExpenseDetail>().ReverseMap();
 

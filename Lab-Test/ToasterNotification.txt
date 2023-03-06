@@ -1,0 +1,8 @@
+  NotifyService.Success("This is a Success Notification");
+  NotifyService.Error("This is an Error Notification");
+  NotifyService.Warning("This is a Warning Notification");
+  NotifyService.Information("This is an Information Notification");
+  NotifyService.Success("This toast will be dismissed in 10 seconds.", 10);
+  NotifyService.Custom("Custom Notification - closes in 5 seconds.", 5, "whitesmoke", "fa fa-gear");
+  NotifyService.Custom("Custom Notification - closes in 5 seconds.", 10, "#135224", "fa fa-gear");
+           

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace Model.DtoModels.ExpenseDtoModels
 {
@@ -8,8 +9,10 @@ namespace Model.DtoModels.ExpenseDtoModels
 
         [Required]
         [StringLength(PropertyLength.Name100Length)]
+        [DisplayName("Name")]
         public string Name { get; set; }
 
+        [DisplayName("Unit Price")]
         public double UnitPrice { get; set; }
 
         [StringLength(PropertyLength.Description500Length)]

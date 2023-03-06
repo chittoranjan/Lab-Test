@@ -1,3 +1,5 @@
+using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -23,9 +25,14 @@ namespace Lab_Test
         {
             services.AddControllersWithViews();
             services.AddMvc();
-            services.AddDbContext<LabTestDbContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("LabTestContext")));
+            services.AddDbContext<LabTestDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LabTestContext")));
             new DependencyResolverProfile().ConfigServiceMap(services);
+            services.AddNotyf(config => { 
+                config.DurationInSeconds = 5; 
+                config.IsDismissable = true;
+                config.HasRippleEffect = true;
+                config.Position = NotyfPosition.BottomRight;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -47,7 +54,7 @@ namespace Lab_Test
             app.UseRouting();
 
             app.UseAuthorization();
-
+            app.UseNotyf();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
