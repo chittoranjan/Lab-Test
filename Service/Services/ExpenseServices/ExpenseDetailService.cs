@@ -6,6 +6,7 @@ using Service.BaseService;
 using Service.IServices.IExpenseServices;
 using System.Threading.Tasks;
 using System;
+using Model.DataTablePaginationModels;
 
 namespace Service.Services.ExpenseServices
 {
@@ -49,6 +50,13 @@ namespace Service.Services.ExpenseServices
             if (model == null) return null;
             var dto = _iMapper.Map<ExpenseDetailDto>(model);
             return dto;
+        }
+
+        public async Task<DataTablePagination<ExpenseDetailSearchDto>> Search(DataTablePagination<ExpenseDetailSearchDto> searchDto)
+        {
+            searchDto ??= new DataTablePagination<ExpenseDetailSearchDto>();
+            var dataTable = await Repository.Search(searchDto);
+            return dataTable;
         }
 
         public async Task<bool> DeleteAsync(int id)

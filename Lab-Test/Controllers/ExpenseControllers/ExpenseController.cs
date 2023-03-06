@@ -1,150 +1,118 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using Model.EntityModels.ExpenseModels;
-using ProjectContext.ProjectDbContext;
-using System.Linq;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
+using Microsoft.AspNetCore.Mvc;
+using Model.DataTablePaginationModels;
+using Model.DtoModels.ExpenseDtoModels;
+using Service.IServices.IExpenseServices;
 using System.Threading.Tasks;
 
 namespace Lab_Test.Controllers.ExpenseControllers
 {
     public class ExpenseController : Controller
     {
-        private readonly LabTestDbContext _context;
-
-        public ExpenseController(LabTestDbContext context)
+        #region Config
+        private readonly IExpenseService _iService;
+        public INotyfService NotifyService { get; }
+        public ExpenseController(IExpenseService iService, INotyfService iNotifyService)
         {
-            _context = context;
+            _iService = iService;
+            NotifyService = iNotifyService;
         }
+        #endregion
 
-        // GET: Expense
-        public async Task<IActionResult> Index()
-        {
-            return View(await _context.Expenses.ToListAsync());
-        }
-
-        // GET: Expense/Details/5
+        #region Details
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var expenseItem = await _context.Expenses
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (expenseItem == null)
-            {
-                return NotFound();
-            }
-
-            return View(expenseItem);
+            if (id == null) return NotFound();
+            var data = await _iService.GetByIdAsync(id ?? 0);
+            if (data == null) return NotFound();
+            return View(data);
         }
+        #endregion
 
-        // GET: Expense/Create
+        #region Create
         public IActionResult Create()
         {
             return View();
         }
 
-        // POST: Expense/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,UnitPrice,Description")] Expense expenseItem)
+        public async Task<IActionResult> Create(ExpenseDto dto)
         {
-            if (ModelState.IsValid)
-            {
-                _context.Add(expenseItem);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(expenseItem);
-        }
+            if (!ModelState.IsValid) return null;
+            var result = await _iService.AddAsync(dto);
 
-        // GET: Expense/Edit/5
+            if (!result) return View(dto);
+            NotifyService.Success("Expense successfully saved!");
+            return RedirectToAction(nameof(Search));
+        }
+        #endregion
+
+        #region Edit
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var expenseItem = await _context.Expenses.FindAsync(id);
-            if (expenseItem == null)
-            {
-                return NotFound();
-            }
-            return View(expenseItem);
+            var data = await _iService.GetByIdAsync(id ?? 0);
+            if (data == null) return NotFound();
+
+            return View(data);
         }
 
-        // POST: Expense/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,UnitPrice,Description")] Expense expenseItem)
+        public async Task<IActionResult> Edit(int id, ExpenseDto dto)
         {
-            if (id != expenseItem.Id)
-            {
-                return NotFound();
-            }
+            if (id != dto.Id) return NotFound();
+            if (!ModelState.IsValid) return null;
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(expenseItem);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!ExpenseExists(expenseItem.Id))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(expenseItem);
+            var result = await _iService.UpdateAsync(dto);
+
+            if (!result) return View(dto);
+            NotifyService.Information("Expense successfully updated!");
+            return RedirectToAction(nameof(Search));
+        }
+        #endregion
+
+        #region Search
+        [HttpGet]
+        public IActionResult Search()
+        {
+            return View();
         }
 
-        // GET: Expense/Delete/5
+        [HttpPost]
+        public async Task<IActionResult> Search(DataTablePagination<ExpenseSearchDto> searchDto)
+        {
+            var dataTable = await _iService.Search(searchDto);
+            return Json(dataTable);
+        }
+        #endregion
+
+        #region Delete
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
-            var expenseItem = await _context.Expenses
-                .FirstOrDefaultAsync(m => m.Id == id);
-            if (expenseItem == null)
-            {
-                return NotFound();
-            }
-
-            return View(expenseItem);
+            var data = await _iService.GetByIdAsync(id ?? 0);
+            if (data == null) return NotFound();
+            return View(data);
         }
 
-        // POST: Expense/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var expense = await _context.Expenses.FindAsync(id);
-            if (expense != null) _context.Expenses.Remove(expense);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
+            var result = await _iService.DeleteAsync(id);
+            if (result)
+            {
+                NotifyService.Error("Expense successfully deleted!");
+                return RedirectToAction(nameof(Search));
+            }
 
-        private bool ExpenseExists(int id)
-        {
-            return _context.Expenses.Any(e => e.Id == id);
+            var data = await _iService.GetByIdAsync(id);
+            return View(data);
         }
+        #endregion
     }
 }

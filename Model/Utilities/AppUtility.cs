@@ -1,18 +1,33 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Net.Http.Headers;
-using Microsoft.AspNetCore.Http;
 
-namespace Resolver.Utilities
+namespace Model.Utilities
 {
     public static class AppUtility
     {
         public static string NullToDash(string value)
         {
             if (string.IsNullOrEmpty(value) || string.IsNullOrWhiteSpace(value)) return "--";
-            return "--";
+            return value;
         }
+
+        public static string DateToView(DateTime? date)
+        {
+            if (date == null) return "--";
+            var stringDate = date?.ToString("dd-MMM-yyyy");
+            return stringDate;
+        }
+
+        public static string DateTimeToView(DateTime? dateTime)
+        {
+            if (dateTime == null) return "--";
+            var stringDate = dateTime?.ToString("dd-MMM-yyyy h:mm:ss tt");
+            return stringDate;
+        }
+
         public static FilePathModel GetFileUrl(IFormFile file)
         {
             var folderName = Path.Combine("Resources", "Test");

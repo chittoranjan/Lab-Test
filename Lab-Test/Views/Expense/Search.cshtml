@@ -1,0 +1,54 @@
+﻿@model Model.DtoModels.ExpenseDtoModels.ExpenseSearchDto
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header bg-primary text-white text-left">
+            <div class="row">
+                <div class="col-md-6 text-left">
+                    <h6>Expense List</h6>
+                </div>
+                <div class="col-md-6 text-right">
+                    <a asp-action="Create"><i class="fa fa-plus text-white" title="Create" aria-hidden="true"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="card-body pt-2">
+            <div class="row">
+                <div class="table-responsive">
+                    <table id="ExpenseSearchTable" class="table table-bordered">
+                        <thead class="thead-light">
+                            <tr>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.SerialNo)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Title)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Date)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Description)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Action)
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script src="~/ProjectJs/Expense/ExpenseSearch.js"></script>
+}

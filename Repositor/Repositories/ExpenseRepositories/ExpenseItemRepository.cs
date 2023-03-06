@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Model.DataTablePaginationModels;
 using Model.DtoModels.ExpenseDtoModels;
 using Model.EntityModels.ExpenseModels;
+using Model.Utilities;
 using ProjectContext.ProjectDbContext;
 using Repository.BaseRepository;
 using Repository.IRepositories.IExpenseRepositories;
@@ -52,7 +53,9 @@ namespace Repository.Repositories.ExpenseRepositories
             var sl = searchDto.Start ?? 0;
             foreach (var searchResultDto in searchDto.Data)
             {
+                var modelData = filteredDataList?.FirstOrDefault(c => c.Id == searchResultDto.Id);
                 searchResultDto.SerialNo = ++sl;
+                searchResultDto.Description = AppUtility.NullToDash(modelData?.Description);
             }
 
             return searchDto;

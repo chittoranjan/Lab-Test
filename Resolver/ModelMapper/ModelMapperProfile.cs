@@ -14,10 +14,13 @@ namespace Resolver.ModelMapper
             CreateMap<ExpenseItem, ExpenseItemSearchDto>();
 
             CreateMap<ExpenseDto, Expense>().ReverseMap();
+            CreateMap<Expense, ExpenseSearchDto>();
+
             CreateMap<ExpenseDetailDto, ExpenseDetail>().ReverseMap();
+            CreateMap<ExpenseDetail, ExpenseDetailSearchDto>();
 
             #endregion
-            
+
         }
     }
 }

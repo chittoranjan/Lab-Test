@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 
-namespace Resolver.Utilities
+namespace Model.Utilities
 {
     public class FilePathModel
     {
