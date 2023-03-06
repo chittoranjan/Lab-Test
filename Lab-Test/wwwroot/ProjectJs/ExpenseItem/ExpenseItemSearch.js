@@ -50,31 +50,31 @@ function search() {
 
         "columns": [
             {
-                data: 'SerialNo',
+                data: "SerialNo",
                 render: function (data, type, row, meta) {
                     return row.serialNo;
                 }
             },
             {
-                data: 'Name',
+                data: "Name",
                 render: function (data, type, row, meta) {
                     return row.name;
                 }
             },
             {
-                data: 'UnitPrice',
+                data: "UnitPrice",
                 render: function (data, type, row, meta) {
                     return row.unitPrice;
                 }
             },
             {
-                data: 'Description',
+                data: "Description",
                 render: function (data, type, row, meta) {
                     return row.description;
                 }
             },
             {
-                data: 'Action',
+                data: "Action",
                 render: function (data, type, row, meta) {
                     var editBtn = "<a href='Edit/" + row.id + "'><i class='fa fa-pencil text-warning m-1' title='Edit' aria-hidden='true'></i></a>";
                     var detailsBtn = "<a href='Details/" + row.id + "'><i class='fa fa-eye text-info m-1' title='Details' aria-hidden='true'></i></a>";
@@ -141,31 +141,31 @@ function getSearchResult() {
             data: response.dataList,
             columns: [
                 {
-                    data: 'SerialNo',
+                    data: "SerialNo",
                     render: function (data, type, row, meta) {
                         return row.serialNo;
                     }
                 },
                 {
-                    data: 'Name',
+                    data: "Name",
                     render: function (data, type, row, meta) {
                         return row.name;
                     }
                 },
                 {
-                    data: 'UnitPrice',
+                    data: "UnitPrice",
                     render: function (data, type, row, meta) {
                         return row.unitPrice;
                     }
                 },
                 {
-                    data: 'Description',
+                    data: "Description",
                     render: function (data, type, row, meta) {
                         return row.description;
                     }
                 },
                 {
-                    data: 'Action',
+                    data: "Action",
                     render: function (data, type, row, meta) {
                         var editBtn = "<a href='Edit/" + row.id + "'><i class='fa fa-pencil text-warning m-1' title='Edit' aria-hidden='true'></i></a>";
                         var detailsBtn = "<a href='Details/" + row.id + "'><i class='fa fa-eye text-info m-1' title='Details' aria-hidden='true'></i></a>";

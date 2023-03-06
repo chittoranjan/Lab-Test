@@ -74,7 +74,7 @@ namespace Lab_Test.Controllers.ExpenseControllers
         }
         #endregion
 
-        #region GlobalSearch
+        #region Search
         [HttpGet]
         public IActionResult Search()
         {
@@ -115,12 +115,21 @@ namespace Lab_Test.Controllers.ExpenseControllers
         }
         #endregion
 
-        // [HttpGet("IsExpenseItemNameExist", Name = "IsExpenseItemNameExist")]
-        // public async Task<IActionResult> IsExpItemCategoryNameExistAsync(string name, long id = 0)
+        #region EXISTING CHECK
+        [HttpPost]
+        public async Task<IActionResult> IsExpItemNameExistAsync(string name, long id = 0)
+        {
+            if (string.IsNullOrEmpty(name) && string.IsNullOrWhiteSpace(name)) return BadRequest("Sorry, No Name Found!");
+            var data = id > 0 ? await _iService.GetFirstOrDefaultAsync(c => c.Name.ToUpper().Equals(name.ToUpper()) && c.Id != id) : await _iService.GetFirstOrDefaultAsync(c => c.Name.ToUpper().Equals(name.ToUpper()));
+            return data != null ? Json(true) : Json(false);
+        }
+        
+        // [HttpPost]
+        // public JsonResult IsExpItemNameExistAsync(string name, int id = 0)
         // {
-        //     if (string.IsNullOrEmpty(name) && string.IsNullOrWhiteSpace(name)) return BadRequest("Sorry, No Name Found!");
-        //     var data = id > 0 ? await _iService.IsExistsAsync(c => c.Name.Equals(name) && c.Id != id) : await _iService.IsExistsAsync(c => c.Name.Equals(name));
-        //     return Ok(data);
+        //     var data = id > 0 ? _iService.GetFirstOrDefault(c => c.Name.ToUpper().Equals(name.ToUpper()) && c.Id != id) : _iService.GetFirstOrDefault(c => c.Name.ToUpper().Equals(name.ToUpper()));
+        //     return data != null ? Json(true) : Json(false);
         // }
+        #endregion
     }
 }
