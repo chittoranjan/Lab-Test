@@ -7,6 +7,7 @@ using Service.IServices.IExpenseServices;
 using System.Threading.Tasks;
 using AutoMapper;
 using Model.DataTablePaginationModels;
+using Model.Utilities;
 
 namespace Service.Services.ExpenseServices
 {
@@ -40,8 +41,8 @@ namespace Service.Services.ExpenseServices
         public new async Task<ExpenseItemDto> GetByIdAsync(int id)
         {
             if (id ==0) return null;
-            var data = await Repository.GetByIdAsync(id);
-            var dto = _iMapper.Map<ExpenseItemDto>(data);
+            var model = await Repository.GetByIdAsync(id);
+            var dto = ConvertModelToDto(model);
             return dto;
         }
 

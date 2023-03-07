@@ -40,8 +40,8 @@ namespace Service.Services.ExpenseServices
         public new async Task<ExpenseDto> GetByIdAsync(int id)
         {
             if (id == 0) return null;
-            var data = await Repository.GetByIdAsync(id);
-            var dto = _iMapper.Map<ExpenseDto>(data);
+            var model = await Repository.GetByIdAsync(id);
+            var dto = ConvertModelToDto(model);
             return dto;
         }
 
