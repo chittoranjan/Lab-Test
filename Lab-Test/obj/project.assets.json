@@ -10890,11 +10890,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "G:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj",
+      "projectUniqueName": "F:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj",
       "projectName": "Lab-Test",
-      "projectPath": "G:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj",
+      "projectPath": "F:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj",
       "packagesPath": "C:\\Users\\chitt\\.nuget\\packages\\",
-      "outputPath": "G:\\Lab-Test-Core-MVC\\Lab-Test\\obj\\",
+      "outputPath": "F:\\Lab-Test-Core-MVC\\Lab-Test\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\chitt\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -10911,8 +10911,8 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
-            "G:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj": {
-              "projectPath": "G:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj"
+            "F:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj": {
+              "projectPath": "F:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj"
             }
           }
         }
@@ -10983,7 +10983,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }

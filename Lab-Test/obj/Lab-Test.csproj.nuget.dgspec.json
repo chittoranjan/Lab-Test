@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "G:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj": {}
+    "F:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj": {}
   },
   "projects": {
-    "G:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj": {
+    "F:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj",
+        "projectUniqueName": "F:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj",
         "projectName": "Lab-Test",
-        "projectPath": "G:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj",
+        "projectPath": "F:\\Lab-Test-Core-MVC\\Lab-Test\\Lab-Test.csproj",
         "packagesPath": "C:\\Users\\chitt\\.nuget\\packages\\",
-        "outputPath": "G:\\Lab-Test-Core-MVC\\Lab-Test\\obj\\",
+        "outputPath": "F:\\Lab-Test-Core-MVC\\Lab-Test\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chitt\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -28,8 +28,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "G:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj": {
-                "projectPath": "G:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj"
+              "F:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj": {
+                "projectPath": "F:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj"
               }
             }
           }
@@ -100,18 +100,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "G:\\Lab-Test-Core-MVC\\Model\\Model.csproj": {
+    "F:\\Lab-Test-Core-MVC\\Model\\Model.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\Lab-Test-Core-MVC\\Model\\Model.csproj",
+        "projectUniqueName": "F:\\Lab-Test-Core-MVC\\Model\\Model.csproj",
         "projectName": "Model",
-        "projectPath": "G:\\Lab-Test-Core-MVC\\Model\\Model.csproj",
+        "projectPath": "F:\\Lab-Test-Core-MVC\\Model\\Model.csproj",
         "packagesPath": "C:\\Users\\chitt\\.nuget\\packages\\",
-        "outputPath": "G:\\Lab-Test-Core-MVC\\Model\\obj\\",
+        "outputPath": "F:\\Lab-Test-Core-MVC\\Model\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chitt\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -165,18 +165,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "G:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj": {
+    "F:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj",
+        "projectUniqueName": "F:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj",
         "projectName": "ProjectContext",
-        "projectPath": "G:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj",
+        "projectPath": "F:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj",
         "packagesPath": "C:\\Users\\chitt\\.nuget\\packages\\",
-        "outputPath": "G:\\Lab-Test-Core-MVC\\ProjectContext\\obj\\",
+        "outputPath": "F:\\Lab-Test-Core-MVC\\ProjectContext\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chitt\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -193,8 +193,8 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "G:\\Lab-Test-Core-MVC\\Model\\Model.csproj": {
-                "projectPath": "G:\\Lab-Test-Core-MVC\\Model\\Model.csproj"
+              "F:\\Lab-Test-Core-MVC\\Model\\Model.csproj": {
+                "projectPath": "F:\\Lab-Test-Core-MVC\\Model\\Model.csproj"
               }
             }
           }
@@ -242,18 +242,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "G:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj": {
+    "F:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj",
+        "projectUniqueName": "F:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj",
         "projectName": "Repository",
-        "projectPath": "G:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj",
+        "projectPath": "F:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj",
         "packagesPath": "C:\\Users\\chitt\\.nuget\\packages\\",
-        "outputPath": "G:\\Lab-Test-Core-MVC\\Repositor\\obj\\",
+        "outputPath": "F:\\Lab-Test-Core-MVC\\Repositor\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chitt\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -270,11 +270,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "G:\\Lab-Test-Core-MVC\\Model\\Model.csproj": {
-                "projectPath": "G:\\Lab-Test-Core-MVC\\Model\\Model.csproj"
+              "F:\\Lab-Test-Core-MVC\\Model\\Model.csproj": {
+                "projectPath": "F:\\Lab-Test-Core-MVC\\Model\\Model.csproj"
               },
-              "G:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj": {
-                "projectPath": "G:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj"
+              "F:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj": {
+                "projectPath": "F:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj"
               }
             }
           }
@@ -314,18 +314,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "G:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj": {
+    "F:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj",
+        "projectUniqueName": "F:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj",
         "projectName": "Resolver",
-        "projectPath": "G:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj",
+        "projectPath": "F:\\Lab-Test-Core-MVC\\Resolver\\Resolver.csproj",
         "packagesPath": "C:\\Users\\chitt\\.nuget\\packages\\",
-        "outputPath": "G:\\Lab-Test-Core-MVC\\Resolver\\obj\\",
+        "outputPath": "F:\\Lab-Test-Core-MVC\\Resolver\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chitt\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -342,11 +342,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "G:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj": {
-                "projectPath": "G:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj"
+              "F:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj": {
+                "projectPath": "F:\\Lab-Test-Core-MVC\\ProjectContext\\ProjectContext.csproj"
               },
-              "G:\\Lab-Test-Core-MVC\\Service\\Service.csproj": {
-                "projectPath": "G:\\Lab-Test-Core-MVC\\Service\\Service.csproj"
+              "F:\\Lab-Test-Core-MVC\\Service\\Service.csproj": {
+                "projectPath": "F:\\Lab-Test-Core-MVC\\Service\\Service.csproj"
               }
             }
           }
@@ -394,18 +394,18 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "G:\\Lab-Test-Core-MVC\\Service\\Service.csproj": {
+    "F:\\Lab-Test-Core-MVC\\Service\\Service.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "G:\\Lab-Test-Core-MVC\\Service\\Service.csproj",
+        "projectUniqueName": "F:\\Lab-Test-Core-MVC\\Service\\Service.csproj",
         "projectName": "Service",
-        "projectPath": "G:\\Lab-Test-Core-MVC\\Service\\Service.csproj",
+        "projectPath": "F:\\Lab-Test-Core-MVC\\Service\\Service.csproj",
         "packagesPath": "C:\\Users\\chitt\\.nuget\\packages\\",
-        "outputPath": "G:\\Lab-Test-Core-MVC\\Service\\obj\\",
+        "outputPath": "F:\\Lab-Test-Core-MVC\\Service\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\chitt\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -422,11 +422,11 @@
           "net7.0": {
             "targetAlias": "net7.0",
             "projectReferences": {
-              "G:\\Lab-Test-Core-MVC\\Model\\Model.csproj": {
-                "projectPath": "G:\\Lab-Test-Core-MVC\\Model\\Model.csproj"
+              "F:\\Lab-Test-Core-MVC\\Model\\Model.csproj": {
+                "projectPath": "F:\\Lab-Test-Core-MVC\\Model\\Model.csproj"
               },
-              "G:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj": {
-                "projectPath": "G:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj"
+              "F:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj": {
+                "projectPath": "F:\\Lab-Test-Core-MVC\\Repositor\\Repository.csproj"
               }
             }
           }
@@ -462,7 +462,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
         }
       }
     }
