@@ -1,9 +1,11 @@
-﻿using AspNetCoreHero.ToastNotification.Abstractions;
+﻿using System.Collections.Generic;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Model.DataTablePaginationModels;
 using Model.DtoModels.ExpenseDtoModels;
 using Service.IServices.IExpenseServices;
 using System.Threading.Tasks;
+using Model.EntityModels.ExpenseModels;
 
 namespace Lab_Test.Controllers.ExpenseControllers
 {
@@ -32,6 +34,20 @@ namespace Lab_Test.Controllers.ExpenseControllers
         #region Create
         public IActionResult Create()
         {
+            //List<ExpenseItem> models = new List<ExpenseItem>();
+            //for (int i = 1; i <= 5500; i++)
+            //{
+            //    var model = new ExpenseItem()
+            //    {
+            //        Id = 0,
+            //        Name = "Test Item " + i,
+            //        UnitPrice = 10 + i,
+            //        Description = "Test Description" + i,
+            //    };
+            //    models.Add(model);
+            //}
+
+            //var result = _iService.AddRange(models);
             return View();
         }
 
@@ -123,7 +139,7 @@ namespace Lab_Test.Controllers.ExpenseControllers
             var data = id > 0 ? await _iService.GetFirstOrDefaultAsync(c => c.Name.ToUpper().Equals(name.ToUpper()) && c.Id != id) : await _iService.GetFirstOrDefaultAsync(c => c.Name.ToUpper().Equals(name.ToUpper()));
             return data != null ? Json(true) : Json(false);
         }
-        
+
         // [HttpPost]
         // public JsonResult IsExpItemNameExistAsync(string name, int id = 0)
         // {
