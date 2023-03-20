@@ -36,43 +36,43 @@
                             <textarea asp-for="Description" class="form-control"></textarea>
                             <span asp-validation-for="Description" class="text-danger"></span>
                         </div>
-                        
+
                         <div class="form-group text-right">
                             <input type="button" title="Add Item" value="Add Item" class="btn btn-outline-primary btn-width" data-toggle="modal" data-target="#addExpDetailModal" />
                         </div>
 
                         <div class="form-group">
                             <div class="table-responsive">
-                                <table id="ExpenseDetail" class="table table-bordered">
+                                <table class="table table-bordered">
                                     <thead class="thead-light">
-                                    <tr>
-                                        <th>
-                                            SL
-                                        </th>
-                                        <th>
-                                            Item Name
-                                        </th>
-                                        <th>
-                                            Unit Price
-                                        </th>
-                                        <th>
-                                            Qty
-                                        </th>
-                                        <th>
-                                            Total Price
-                                        </th>
-                                        <th>
-                                            Discount
-                                        </th>
-                                        <th>
-                                            Note
-                                        </th>
-                                        <th>
-                                            Action
-                                        </th>
-                                    </tr>
+                                        <tr>
+                                            <th>
+                                                SL
+                                            </th>
+                                            <th>
+                                                Item Name
+                                            </th>
+                                            <th>
+                                                Qty
+                                            </th>
+                                            <th>
+                                                Unit Price
+                                            </th>
+                                            <th>
+                                                Unit Discount
+                                            </th>
+                                            <th>
+                                                Total Price
+                                            </th>
+                                            <th>
+                                                Note
+                                            </th>
+                                            <th>
+                                                Action
+                                            </th>
+                                        </tr>
                                     </thead>
-                                    <tbody>
+                                    <tbody id="ExpenseDetailTable">
                                     </tbody>
                                 </table>
                             </div>
@@ -103,21 +103,162 @@
             </div>
 
             <div class="modal-body">
-                Modal body..
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Expense Item</label>
+                                    <input id="expItemIdVal" type="number" min="1" class="form-control" />
+                                    <span id="expItemIdValidation" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Qty</label>
+                                    <input id="expItemQtyVal" type="number" min="1" class="form-control" />
+                                    <span id="expItemQtyValValidation" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Unit Price</label>
+                                    <input id="expItemUnitPriceVal" type="number" min="1" class="form-control" />
+                                    <span id="expItemUnitPriceValValidation" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="form-group">
+                                    <label>Unit Discount</label>
+                                    <input id="expItemUnitDiscountVal" type="number" min="0" class="form-control" />
+                                    <span id="expItemUnitDiscountValValidation" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Note</label>
+                            <textarea id="expItemNoteVal" cols="2" class="form-control"></textarea>
+                            <span id="expItemNoteValValidation" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="modal-footer">
-                <button type="button" class="btn btn-primary btn-width">Add</button>
+                <button id="expItemAddButton" type="button" class="btn btn-primary btn-width">Add</button>
                 <button type="button" class="btn btn-danger btn-width" data-dismiss="modal">Close</button>
             </div>
 
         </div>
     </div>
 </div>
-<!-- AddExpDetailModal -->
 
+<!-- AddExpDetailModal -->
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
+    <script>
+        var $ = jQuery.noConflict(true);
+
+        $(document.body).on("change", "#expItemIdVal", function () {
+            var expItemId = 0;
+            var value = $(this).val();
+            $('#expItemIdValidation').text(null);
+            if (value <= 0) {
+                var msg = "Sorry, Expense Item is required!";
+                $('#expItemIdValidation').text(msg);
+                return;
+            }
+        });
+
+        $(document.body).on("change", "#expItemQtyVal", function () {
+            var expItemId = 0;
+            var value = $(this).val();
+            $('#expItemQtyValValidation').text(null);
+            if (value <= 0) {
+                var msg = "Sorry, Expense Item Qty is not valid!";
+                $('#expItemQtyValValidation').text(msg);
+                return;
+            }
+        });
+
+        $(document.body).on("change", "#expItemUnitPriceVal", function () {
+            var expItemId = 0;
+            var value = $(this).val();
+            $('#expItemUnitPriceValValidation').text(null);
+            if (value <= 0) {
+                var msg = "Sorry, Expense Item unit price is not valid!";
+                $('#expItemUnitPriceValValidation').text(msg);
+                return;
+            }
+        });
+
+        $(document.body).on("change", "#expItemUnitDiscountVal", function () {
+            var expItemId = 0;
+            var value = $(this).val();
+            $('#expItemUnitDiscountValValidation').text(null);
+            if (value < 0) {
+                var msg = "Sorry, Expense Item unit price Discount is not valid!";
+                $('#expItemUnitDiscountValValidation').text(msg);
+                return;
+            }
+        });
+
+        $("#expItemAddButton").click(function () {
+            createExpItemDetailRow();
+        });
+
+
+        function createExpItemDetailRow() {
+            var selectedItem = getSelectedItem();
+            var index = $("#ExpenseDetailTable").children("tr").length;
+            var sl = index;
+
+            var indexCell = "<td style='display:none'><input type='hidden' id='Index" + index + "' name='Details.Index' value='" + index + "'/> </td>";
+            var serialCell = "<td>" + (++sl) + "</td>";
+
+            var expItemNameCell = "<td><input type='hidden' id='expItemId" + index + "' name='Details[" + index + "].ExpenseItemId' value='" + selectedItem.ExpenseItemId + "'/>" + selectedItem.ExpenseItemId + "</td>";
+            var expItemQtyCell = "<td><input type='hidden' id='ExpItemQty" + index + "' name='Details[" + index + "].Qty' value='" + selectedItem.ExpItemQty + "'/>" + selectedItem.ExpItemQty + "</td>";
+            var expItemUnitPriceCell = "<td><input type='hidden' id='ExpItemUnitPrice" + index + "' name='Details[" + index + "].UnitPrice' value='" + selectedItem.ExpItemUnitPrice + "'/>" + selectedItem.ExpItemUnitPrice + "</td>";
+            var expItemUnitDiscountCell = "<td><input type='hidden' id='ExpItemUnitDiscount" + index + "' name='Details[" + index + "].Discount' value='" + selectedItem.ExpItemUnitDiscount + "'/>" + selectedItem.ExpItemUnitDiscount + "</td>";
+            var totalPrice = ((selectedItem.ExpItemUnitPrice - selectedItem.ExpItemUnitDiscount) * selectedItem.ExpItemQty);
+            var expItemPrice = "<td> <input type='hidden' id ='TotalPrice" + index + "' name = 'Details[" + index + "].Price' value = '" + totalPrice + "' /> " + totalPrice + "</td>";
+            var expItemNoteCell = "<td><input type='hidden' id='ExpItemNote" + index + "' name='Details[" + index + "].Note' value='" + selectedItem.ExpItemNote + "'/>" + selectedItem.ExpItemNote + "</td>";
+            var actionCell = "<td></td>";
+
+            var createNewRow = "<tr>" + indexCell + serialCell + expItemNameCell + expItemQtyCell + expItemUnitPriceCell + expItemUnitDiscountCell + expItemPrice + expItemNoteCell + actionCell + " </tr>";
+            $("#ExpenseDetailTable").append(createNewRow);
+
+            clearSelectedItem();
+        };
+
+        function getSelectedItem() {
+            //You can validate here
+            var expItemId = $("#expItemIdVal").val();
+            var expItemQty = $("#expItemQtyVal").val();
+            var expItemUnitPrice = $("#expItemUnitPriceVal").val();
+            var expItemUnitDiscount = $("#expItemUnitDiscountVal").val();
+            var expItemNote = $("#expItemNoteVal").val();
+
+            var item = {
+                "ExpenseItemId": expItemId,
+                "ExpItemQty": expItemQty,
+                "ExpItemUnitPrice": expItemUnitPrice,
+                "ExpItemUnitDiscount": expItemUnitDiscount,
+                "ExpItemNote": expItemNote
+            }
+            return item;
+        };
+
+        function clearSelectedItem() {
+            $("#expItemIdVal").val(null);
+            $("#expItemQtyVal").val(null);
+            $("#expItemUnitPriceVal").val(null);
+            $("#expItemUnitDiscountVal").val(null);
+            $("#expItemNoteVal").val("");
+        };
+    </script>
 }

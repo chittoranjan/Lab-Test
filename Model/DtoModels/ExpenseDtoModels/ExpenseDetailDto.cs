@@ -15,18 +15,8 @@ namespace Model.DtoModels.ExpenseDtoModels
 
         public double Qty { get; set; }
         public double UnitPrice { get; set; }
-        public double Price
-        {
-            get => GetPrice();
-            set => GetPrice();
-        }
-
-        private double GetPrice()
-        {
-            return Qty * UnitPrice;
-        }
-
         public double Discount { get; set; }
+        public double Price { get; set; }
 
         [StringLength(PropertyLength.Description500Length)]
         public string Note { get; set; }
