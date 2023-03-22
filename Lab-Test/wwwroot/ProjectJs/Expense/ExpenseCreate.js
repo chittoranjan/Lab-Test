@@ -85,7 +85,7 @@ function getSelectedItem() {
         "ExpenseItemId": expItemId,
         "ExpItemQty": expItemQty,
         "ExpItemUnitPrice": expItemUnitPrice,
-        "ExpItemUnitDiscount": expItemUnitDiscount,
+        "ExpItemUnitDiscount": !expItemUnitDiscount > 0 ? 0 : expItemUnitDiscount,
         "ExpItemNote": expItemNote
     }
     return item;

@@ -1,9 +1,13 @@
-﻿using AspNetCoreHero.ToastNotification.Abstractions;
+﻿using System.Collections.Generic;
+using System.Linq;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Model.DataTablePaginationModels;
 using Model.DtoModels.ExpenseDtoModels;
 using Service.IServices.IExpenseServices;
 using System.Threading.Tasks;
+using Model.EntityModels.ExpenseModels;
+using NuGet.Packaging;
 
 namespace Lab_Test.Controllers.ExpenseControllers
 {
@@ -12,12 +16,14 @@ namespace Lab_Test.Controllers.ExpenseControllers
         #region Config
 
         private readonly IExpenseService _iService;
+        private readonly IExpenseItemService _iExpItemService;
         public INotyfService NotifyService { get; }
 
-        public ExpenseController(IExpenseService iService, INotyfService iNotifyService)
+        public ExpenseController(IExpenseService iService, INotyfService iNotifyService, IExpenseItemService iExpItemService)
         {
             _iService = iService;
             NotifyService = iNotifyService;
+            _iExpItemService = iExpItemService;
         }
 
         #endregion
@@ -38,6 +44,9 @@ namespace Lab_Test.Controllers.ExpenseControllers
 
         public IActionResult Create()
         {
+            var expItemSelectionList = _iExpItemService.GetAll().ToList();
+            expItemSelectionList.Insert(0, new ExpenseItem() { Id = 0, Name = "Select Item" });
+            ViewBag.ExpItemSelectionList = expItemSelectionList;
             return View();
         }
 
@@ -60,6 +69,10 @@ namespace Lab_Test.Controllers.ExpenseControllers
         public async Task<IActionResult> Edit(int id)
         {
             if (id == 0) return NotFound();
+
+            var expItemSelectionList = (await _iExpItemService.GetAllAsync()).ToList();
+            expItemSelectionList.Insert(0, new ExpenseItem() { Id = 0, Name = "Select Item" });
+            ViewBag.ExpItemSelectionList = expItemSelectionList;
 
             var data = await _iService.GetByIdAsync(id);
             if (data == null) return NotFound();

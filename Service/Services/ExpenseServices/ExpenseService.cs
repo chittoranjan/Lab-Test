@@ -14,13 +14,13 @@ namespace Service.Services.ExpenseServices
     public class ExpenseService : BaseService<Expense>, IExpenseService
     {
         private IExpenseRepository Repository { get; set; }
-        private readonly IExpenseDetailService _IExpenseDetailService;
+        private readonly IExpenseDetailService _iExpenseDetailService;
         private readonly IMapper _iMapper;
         public ExpenseService(IExpenseRepository iRepository, IMapper iMapper, IExpenseDetailService iExpenseDetailService) : base(iRepository)
         {
             Repository = iRepository;
             _iMapper = iMapper;
-            _IExpenseDetailService = iExpenseDetailService;
+            _iExpenseDetailService = iExpenseDetailService;
         }
 
         public async Task<bool> AddAsync(ExpenseDto dto)
@@ -54,7 +54,7 @@ namespace Service.Services.ExpenseServices
             var dto = _iMapper.Map<ExpenseDto>(model);
             if (model.Details is { Count: > 0 })
             {
-                dto.Details = _IExpenseDetailService.ConvertModelToDto(model.Details.ToList());
+                dto.Details = _iExpenseDetailService.ConvertModelToDto(model.Details.ToList());
             }
             return dto;
         }
