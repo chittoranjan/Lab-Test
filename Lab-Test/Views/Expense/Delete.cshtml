@@ -8,7 +8,7 @@
 <div class="container-fluid">
     <div class="card">
         <div class="card-header bg-primary text-white text-left">
-            <h6>Expense Item Delete</h6>
+            <h6>Expense Delete</h6>
         </div>
         <div class="card-body">
             <div class="text-left pb-2">
@@ -57,6 +57,59 @@
                                 <div class="col-sm-9 bg-color">
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <strong>Expense Detail Items:</strong>
+                        </div>
+                    </div>
+                    <div class="form-group pt-2">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th>
+                                            SL
+                                        </th>
+                                        <th>
+                                            Item Name
+                                        </th>
+                                        <th>
+                                            Qty
+                                        </th>
+                                        <th>
+                                            Unit Price
+                                        </th>
+                                        <th>
+                                            Unit Discount
+                                        </th>
+                                        <th>
+                                            Total Price
+                                        </th>
+                                        <th>
+                                            Note
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody id="ExpenseDetailTable">
+                                    @if (Model is { Details.Count: > 0 })
+                                    {
+                                        var sl = 0;
+                                        foreach (var detail in Model.Details)
+                                        {
+                                        <td>@(++sl)</td>
+                                        <td>@detail.ExpenseItemName</td>
+                                        <td>@detail.Qty</td>
+                                        <td>@detail.UnitPrice</td>
+                                        <td>@detail.Discount</td>
+                                        <td>@detail.Price</td>
+                                        <td>@detail.Note</td>
+                                        }
+                                    }
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                     <hr />

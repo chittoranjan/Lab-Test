@@ -1,27 +1,29 @@
-﻿using System.Collections.Generic;
-using AspNetCoreHero.ToastNotification.Abstractions;
+﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Model.DataTablePaginationModels;
 using Model.DtoModels.ExpenseDtoModels;
 using Service.IServices.IExpenseServices;
 using System.Threading.Tasks;
-using Model.EntityModels.ExpenseModels;
 
 namespace Lab_Test.Controllers.ExpenseControllers
 {
     public class ExpenseItemController : Controller
     {
         #region Config
+
         private readonly IExpenseItemService _iService;
         public INotyfService NotifyService { get; }
+
         public ExpenseItemController(IExpenseItemService iService, INotyfService notifyService)
         {
             _iService = iService;
             NotifyService = notifyService;
         }
+
         #endregion
 
         #region Details
+
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null) return NotFound();
@@ -29,9 +31,11 @@ namespace Lab_Test.Controllers.ExpenseControllers
             if (data == null) return NotFound();
             return View(data);
         }
+
         #endregion
 
         #region Create
+
         public IActionResult Create()
         {
             //List<ExpenseItem> models = new List<ExpenseItem>();
@@ -62,14 +66,16 @@ namespace Lab_Test.Controllers.ExpenseControllers
             NotifyService.Success("Expense item successfully saved!");
             return RedirectToAction(nameof(Search));
         }
+
         #endregion
 
         #region Edit
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null) return NotFound();
 
-            var data = await _iService.GetByIdAsync(id ?? 0);
+        public async Task<IActionResult> Edit(int id)
+        {
+            if (id == 0) return NotFound();
+
+            var data = await _iService.GetByIdAsync(id);
             if (data == null) return NotFound();
 
             return View(data);
@@ -88,9 +94,11 @@ namespace Lab_Test.Controllers.ExpenseControllers
             NotifyService.Information("Expense item successfully updated!");
             return RedirectToAction(nameof(Search));
         }
+
         #endregion
 
         #region Search
+
         [HttpGet]
         public IActionResult Search()
         {
@@ -103,9 +111,11 @@ namespace Lab_Test.Controllers.ExpenseControllers
             var dataTable = await _iService.Search(searchDto);
             return Json(dataTable);
         }
+
         #endregion
 
         #region Delete
+
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null) return NotFound();
@@ -129,14 +139,19 @@ namespace Lab_Test.Controllers.ExpenseControllers
             var data = await _iService.GetByIdAsync(id);
             return View(data);
         }
+
         #endregion
 
         #region EXISTING CHECK
+
         [HttpPost]
         public async Task<IActionResult> IsExpItemNameExistAsync(string name, long id = 0)
         {
-            if (string.IsNullOrEmpty(name) && string.IsNullOrWhiteSpace(name)) return BadRequest("Sorry, No Name Found!");
-            var data = id > 0 ? await _iService.GetFirstOrDefaultAsync(c => c.Name.ToUpper().Equals(name.ToUpper()) && c.Id != id) : await _iService.GetFirstOrDefaultAsync(c => c.Name.ToUpper().Equals(name.ToUpper()));
+            if (string.IsNullOrEmpty(name) && string.IsNullOrWhiteSpace(name))
+                return BadRequest("Sorry, No Name Found!");
+            var data = id > 0
+                ? await _iService.GetFirstOrDefaultAsync(c => c.Name.ToUpper().Equals(name.ToUpper()) && c.Id != id)
+                : await _iService.GetFirstOrDefaultAsync(c => c.Name.ToUpper().Equals(name.ToUpper()));
             return data != null ? Json(true) : Json(false);
         }
 
@@ -146,6 +161,7 @@ namespace Lab_Test.Controllers.ExpenseControllers
         //     var data = id > 0 ? _iService.GetFirstOrDefault(c => c.Name.ToUpper().Equals(name.ToUpper()) && c.Id != id) : _iService.GetFirstOrDefault(c => c.Name.ToUpper().Equals(name.ToUpper()));
         //     return data != null ? Json(true) : Json(false);
         // }
+
         #endregion
     }
 }
