@@ -1,4 +1,5 @@
-﻿using Model.DataTablePaginationModels;
+﻿using System.Collections.Generic;
+using Model.DataTablePaginationModels;
 using Model.DtoModels.ExpenseDtoModels;
 using Model.EntityModels.ExpenseModels;
 using Service.IBaseService;
@@ -12,6 +13,7 @@ namespace Service.IServices.IExpenseServices
         Task<bool> UpdateAsync(ExpenseDetailDto dto);
         new Task<ExpenseDetailDto> GetByIdAsync(int id);
         ExpenseDetailDto ConvertModelToDto(ExpenseDetail model);
+        List<ExpenseDetailDto> ConvertModelToDto(List<ExpenseDetail> models);
         Task<DataTablePagination<ExpenseDetailSearchDto>> Search(DataTablePagination<ExpenseDetailSearchDto> searchDto);
         Task<bool> DeleteAsync(int id);
     }

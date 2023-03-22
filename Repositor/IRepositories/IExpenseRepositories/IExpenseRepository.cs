@@ -8,6 +8,7 @@ namespace Repository.IRepositories.IExpenseRepositories
 {
     public interface IExpenseRepository : IBaseRepository<Expense>
     {
+        new Task<Expense> GetByIdAsync(int id);
         Task<DataTablePagination<ExpenseSearchDto>> Search(DataTablePagination<ExpenseSearchDto> searchDto);
     }
 }

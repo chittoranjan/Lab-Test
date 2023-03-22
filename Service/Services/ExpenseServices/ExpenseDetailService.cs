@@ -6,6 +6,8 @@ using Service.BaseService;
 using Service.IServices.IExpenseServices;
 using System.Threading.Tasks;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Model.DataTablePaginationModels;
 
 namespace Service.Services.ExpenseServices
@@ -49,7 +51,19 @@ namespace Service.Services.ExpenseServices
         {
             if (model == null) return null;
             var dto = _iMapper.Map<ExpenseDetailDto>(model);
+            dto.ExpenseItemName = model.ExpenseItem?.Name;
             return dto;
+        }
+
+        public List<ExpenseDetailDto> ConvertModelToDto(List<ExpenseDetail> models)
+        {
+            var dataList = new List<ExpenseDetailDto>();
+            if (models is { Count: > 0 })
+            {
+                dataList.AddRange(models.Select(ConvertModelToDto));
+            }
+
+            return dataList;
         }
 
         public async Task<DataTablePagination<ExpenseDetailSearchDto>> Search(DataTablePagination<ExpenseDetailSearchDto> searchDto)

@@ -49,11 +49,11 @@ namespace Lab_Test.Controllers.ExpenseControllers
         #endregion
 
         #region Edit
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(int id)
         {
-            if (id == null) return NotFound();
+            if (id == 0) return NotFound();
 
-            var data = await _iService.GetByIdAsync(id ?? 0);
+            var data = await _iService.GetByIdAsync(id);
             if (data == null) return NotFound();
 
             return View(data);
