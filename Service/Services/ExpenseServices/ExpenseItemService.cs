@@ -1,13 +1,12 @@
-﻿using System;
+﻿using AutoMapper;
+using Model.DataTablePaginationModels;
 using Model.DtoModels.ExpenseDtoModels;
 using Model.EntityModels.ExpenseModels;
 using Repository.IRepositories.IExpenseRepositories;
 using Service.BaseService;
 using Service.IServices.IExpenseServices;
+using System;
 using System.Threading.Tasks;
-using AutoMapper;
-using Model.DataTablePaginationModels;
-using Model.Utilities;
 
 namespace Service.Services.ExpenseServices
 {
@@ -40,7 +39,7 @@ namespace Service.Services.ExpenseServices
 
         public new async Task<ExpenseItemDto> GetByIdAsync(int id)
         {
-            if (id ==0) return null;
+            if (id == 0) return null;
             var model = await Repository.GetByIdAsync(id);
             var dto = ConvertModelToDto(model);
             return dto;

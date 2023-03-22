@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using Model.ModelContracts;
+﻿using Model.ModelContracts;
+using System.ComponentModel;
 
 namespace Model.EntityModels.ExpenseModels
 {

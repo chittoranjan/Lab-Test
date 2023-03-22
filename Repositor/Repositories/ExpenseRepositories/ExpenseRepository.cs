@@ -24,13 +24,13 @@ namespace Repository.Repositories.ExpenseRepositories
 
         public override async Task<Expense> GetByIdAsync(int id)
         {
-            var result = await Context.Expenses.Include(c => c.Details).ThenInclude(c=>c.ExpenseItem).FirstOrDefaultAsync(c => c.Id == id);
+            var result = await Context.Expenses.Include(c => c.Details).ThenInclude(c => c.ExpenseItem).FirstOrDefaultAsync(c => c.Id == id);
             return result;
         }
 
         public async Task<DataTablePagination<ExpenseSearchDto>> Search(DataTablePagination<ExpenseSearchDto> searchDto)
         {
-            var searchResult = Context.Expenses.Include(c=>c.Details).AsNoTracking();
+            var searchResult = Context.Expenses.Include(c => c.Details).AsNoTracking();
 
             var searchModel = searchDto.SearchVm;
             var filter = searchDto?.Search?.Value?.Trim();

@@ -1,5 +1,5 @@
-﻿using System.ComponentModel;
-using Model.DataTableSearchModels;
+﻿using Model.DataTableSearchModels;
+using System.ComponentModel;
 
 namespace Model.DtoModels.ExpenseDtoModels
 {

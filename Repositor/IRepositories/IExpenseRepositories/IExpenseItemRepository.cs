@@ -1,8 +1,8 @@
-﻿using Model.EntityModels.ExpenseModels;
+﻿using Model.DataTablePaginationModels;
+using Model.DtoModels.ExpenseDtoModels;
+using Model.EntityModels.ExpenseModels;
 using Repository.IBaseRepository;
 using System.Threading.Tasks;
-using Model.DtoModels.ExpenseDtoModels;
-using Model.DataTablePaginationModels;
 
 namespace Repository.IRepositories.IExpenseRepositories
 {

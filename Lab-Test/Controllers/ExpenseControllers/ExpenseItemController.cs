@@ -38,20 +38,20 @@ namespace Lab_Test.Controllers.ExpenseControllers
 
         public IActionResult Create()
         {
-            //List<ExpenseItem> models = new List<ExpenseItem>();
-            //for (int i = 1; i <= 5500; i++)
-            //{
-            //    var model = new ExpenseItem()
-            //    {
-            //        Id = 0,
-            //        Name = "Test Item " + i,
-            //        UnitPrice = 10 + i,
-            //        Description = "Test Description" + i,
-            //    };
-            //    models.Add(model);
-            //}
-
-            //var result = _iService.AddRange(models);
+            // List<ExpenseItem> models = new List<ExpenseItem>();
+            // for (int i = 11001; i <= 20000; i++)
+            // {
+            //     var model = new ExpenseItem()
+            //     {
+            //         Id = 0,
+            //         Name = "Test Item " + i,
+            //         UnitPrice = 10 + i,
+            //         Description = "Test Description" + i,
+            //     };
+            //     models.Add(model);
+            // }
+            //
+            // var result = _iService.AddRange(models);
             return View();
         }
 

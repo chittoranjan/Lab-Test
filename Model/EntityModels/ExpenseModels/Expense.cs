@@ -1,10 +1,10 @@
-﻿using System;
+﻿using Model.ModelContracts;
+using System;
 using System.Collections.Generic;
-using Model.ModelContracts;
 
 namespace Model.EntityModels.ExpenseModels
 {
-    public class Expense:IEntity
+    public class Expense : IEntity
     {
         public int Id { get; set; }
         public string Title { get; set; }

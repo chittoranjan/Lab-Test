@@ -27,8 +27,9 @@ namespace Lab_Test
             services.AddMvc();
             services.AddDbContext<LabTestDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("LabTestContext")));
             new DependencyResolverProfile().ConfigServiceMap(services);
-            services.AddNotyf(config => { 
-                config.DurationInSeconds = 5; 
+            services.AddNotyf(config =>
+            {
+                config.DurationInSeconds = 5;
                 config.IsDismissable = true;
                 config.HasRippleEffect = true;
                 config.Position = NotyfPosition.BottomRight;

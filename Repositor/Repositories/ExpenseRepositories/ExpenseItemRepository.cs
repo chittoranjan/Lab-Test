@@ -46,7 +46,7 @@ namespace Repository.Repositories.ExpenseRepositories
 
             searchDto.RecordsTotal = totalRecords;
             searchDto.RecordsFiltered = totalRecords;
-          
+
             var filteredDataList = await searchResult.OrderByDescending(c => c.Id).Skip(skip).Take(pageSize).ToListAsync();
             searchDto.Data = _iMapper.Map<List<ExpenseItemSearchDto>>(filteredDataList);
 

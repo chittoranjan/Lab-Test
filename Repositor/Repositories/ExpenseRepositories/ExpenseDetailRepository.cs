@@ -3,13 +3,13 @@ using Microsoft.EntityFrameworkCore;
 using Model.DataTablePaginationModels;
 using Model.DtoModels.ExpenseDtoModels;
 using Model.EntityModels.ExpenseModels;
+using Model.Utilities;
 using ProjectContext.ProjectDbContext;
 using Repository.BaseRepository;
 using Repository.IRepositories.IExpenseRepositories;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Model.Utilities;
 
 namespace Repository.Repositories.ExpenseRepositories
 {

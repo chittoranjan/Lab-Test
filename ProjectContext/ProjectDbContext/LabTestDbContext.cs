@@ -4,7 +4,7 @@ using ProjectContext.ModelConfig;
 
 namespace ProjectContext.ProjectDbContext
 {
-    public class LabTestDbContext:DbContext
+    public class LabTestDbContext : DbContext
     {
         private readonly DbContextOptions _context;
         public LabTestDbContext(DbContextOptions<LabTestDbContext> context) : base(context)

@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Repository.IBaseRepository;
+using Service.IBaseService;
+using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
-using Repository.IBaseRepository;
-using Service.IBaseService;
 
 namespace Service.BaseService
 {
