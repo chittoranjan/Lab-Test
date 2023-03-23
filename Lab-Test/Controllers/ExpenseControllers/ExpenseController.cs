@@ -1,8 +1,10 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Caching.Distributed;
 using Model.DataTablePaginationModels;
 using Model.DtoModels.ExpenseDtoModels;
 using Model.EntityModels.ExpenseModels;
+using Resolver.DistributedRedisCache;
 using Service.IServices.IExpenseServices;
 using System.Linq;
 using System.Threading.Tasks;
@@ -15,13 +17,15 @@ namespace Lab_Test.Controllers.ExpenseControllers
 
         private readonly IExpenseService _iService;
         private readonly IExpenseItemService _iExpItemService;
+        public readonly IDistributedCache _iDistributedCashe;
         public INotyfService NotifyService { get; }
 
-        public ExpenseController(IExpenseService iService, INotyfService iNotifyService, IExpenseItemService iExpItemService)
+        public ExpenseController(IExpenseService iService, INotyfService iNotifyService, IExpenseItemService iExpItemService, IDistributedCache iDistributedCashe)
         {
             _iService = iService;
             NotifyService = iNotifyService;
             _iExpItemService = iExpItemService;
+            _iDistributedCashe = iDistributedCashe;
         }
 
         #endregion
@@ -40,11 +44,21 @@ namespace Lab_Test.Controllers.ExpenseControllers
 
         #region Create
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var expItemSelectionList = _iExpItemService.GetAll().ToList();
-            expItemSelectionList.Insert(0, new ExpenseItem() { Id = 0, Name = "Select Item" });
-            ViewBag.ExpItemSelectionList = expItemSelectionList;
+            var cacheService = new DistributedRedisCacheService(_iDistributedCashe);
+            var expItemData = await cacheService.GetStringAsync(CacheKeyName.ExpenseItem.ToString());
+
+            if (expItemData.Count <= 0)
+            {
+                var expItemSelectionList = _iExpItemService.GetAll().ToList();
+                expItemSelectionList.Insert(0, new ExpenseItem() { Id = 0, Name = "Select Item" });
+
+                expItemData = expItemSelectionList.ToList<object>();
+                var result = await cacheService.SetStringAsync(CacheKeyName.ExpenseItem.ToString(), expItemData);
+            }
+
+            ViewBag.ExpItemSelectionList = expItemData;
             return View();
         }
 
