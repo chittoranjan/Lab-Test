@@ -17,15 +17,16 @@ namespace Lab_Test.Controllers.ExpenseControllers
 
         private readonly IExpenseService _iService;
         private readonly IExpenseItemService _iExpItemService;
-        public readonly IDistributedCache _iDistributedCache;
         public INotyfService NotifyService { get; }
-
+        public readonly IDistributedCache _iDistributedCache;
+        public readonly DistributedRedisCacheService _CacheService;
         public ExpenseController(IExpenseService iService, INotyfService iNotifyService, IExpenseItemService iExpItemService, IDistributedCache iDistributedCache)
         {
             _iService = iService;
             NotifyService = iNotifyService;
             _iExpItemService = iExpItemService;
             _iDistributedCache = iDistributedCache;
+            _CacheService = new DistributedRedisCacheService(_iDistributedCache);
         }
 
         #endregion
@@ -46,15 +47,15 @@ namespace Lab_Test.Controllers.ExpenseControllers
 
         public async Task<IActionResult> Create()
         {
-            var cacheService = new DistributedRedisCacheService(_iDistributedCache);
-            var expItemData = await cacheService.GetStringAsync(CacheKeyName.ExpenseItem.ToString());
+
+            var expItemData = await _CacheService.GetStringAsync(CacheKeyName.ExpenseItem.ToString());
 
             if (expItemData.Count <= 0)
             {
                 var expItemSelectionList = await _iExpItemService.GetSelectionListAsync();
 
                 expItemData = expItemSelectionList.ToList<object>();
-                var result = await cacheService.SetStringAsync(CacheKeyName.ExpenseItem.ToString(), expItemData);
+                var result = await _CacheService.SetStringAsync(CacheKeyName.ExpenseItem.ToString(), expItemData);
             }
 
             ViewBag.ExpItemSelectionList = expItemData;
