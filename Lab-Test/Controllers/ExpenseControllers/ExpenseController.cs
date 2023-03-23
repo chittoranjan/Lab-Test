@@ -17,15 +17,15 @@ namespace Lab_Test.Controllers.ExpenseControllers
 
         private readonly IExpenseService _iService;
         private readonly IExpenseItemService _iExpItemService;
-        public readonly IDistributedCache _iDistributedCashe;
+        public readonly IDistributedCache _iDistributedCache;
         public INotyfService NotifyService { get; }
 
-        public ExpenseController(IExpenseService iService, INotyfService iNotifyService, IExpenseItemService iExpItemService, IDistributedCache iDistributedCashe)
+        public ExpenseController(IExpenseService iService, INotyfService iNotifyService, IExpenseItemService iExpItemService, IDistributedCache iDistributedCache)
         {
             _iService = iService;
             NotifyService = iNotifyService;
             _iExpItemService = iExpItemService;
-            _iDistributedCashe = iDistributedCashe;
+            _iDistributedCache = iDistributedCache;
         }
 
         #endregion
@@ -46,13 +46,12 @@ namespace Lab_Test.Controllers.ExpenseControllers
 
         public async Task<IActionResult> Create()
         {
-            var cacheService = new DistributedRedisCacheService(_iDistributedCashe);
+            var cacheService = new DistributedRedisCacheService(_iDistributedCache);
             var expItemData = await cacheService.GetStringAsync(CacheKeyName.ExpenseItem.ToString());
 
             if (expItemData.Count <= 0)
             {
-                var expItemSelectionList = _iExpItemService.GetAll().ToList();
-                expItemSelectionList.Insert(0, new ExpenseItem() { Id = 0, Name = "Select Item" });
+                var expItemSelectionList = await _iExpItemService.GetSelectionListAsync();
 
                 expItemData = expItemSelectionList.ToList<object>();
                 var result = await cacheService.SetStringAsync(CacheKeyName.ExpenseItem.ToString(), expItemData);

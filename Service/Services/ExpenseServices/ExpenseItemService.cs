@@ -6,6 +6,8 @@ using Repository.IRepositories.IExpenseRepositories;
 using Service.BaseService;
 using Service.IServices.IExpenseServices;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace Service.Services.ExpenseServices
@@ -59,6 +61,14 @@ namespace Service.Services.ExpenseServices
             return dataTable;
         }
 
+        public async Task<List<ExpenseItem>> GetSelectionListAsync()
+        {
+            var result = await Repository.GetAllAsync();
+            var data = result.ToList();
+            data.Insert(0, new ExpenseItem() { Id = 0, Name = "Select Item" });
+            return data;
+        }
+
         public async Task<bool> DeleteAsync(int id)
         {
             if (id == 0) return false;
@@ -67,5 +77,7 @@ namespace Service.Services.ExpenseServices
             var result = await Repository.RemoveAsync(data, true);
             return result;
         }
+
+
     }
 }

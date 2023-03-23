@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Resolver.DistributedRedisCache
 {
-    public class DistributedRedisCacheService
+    public class DistributedRedisCacheService:IDistributedRedisCacheService
     {
         public readonly IDistributedCache _iDistributedCashe;
 

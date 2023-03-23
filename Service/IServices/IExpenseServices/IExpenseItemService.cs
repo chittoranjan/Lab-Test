@@ -2,6 +2,7 @@
 using Model.DtoModels.ExpenseDtoModels;
 using Model.EntityModels.ExpenseModels;
 using Service.IBaseService;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Service.IServices.IExpenseServices
@@ -13,6 +14,7 @@ namespace Service.IServices.IExpenseServices
         new Task<ExpenseItemDto> GetByIdAsync(int id);
         ExpenseItemDto ConvertModelToDto(ExpenseItem model);
         Task<DataTablePagination<ExpenseItemSearchDto>> Search(DataTablePagination<ExpenseItemSearchDto> searchDto);
+        Task<List<ExpenseItem>> GetSelectionListAsync();
         Task<bool> DeleteAsync(int id);
     }
 }
