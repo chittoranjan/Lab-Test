@@ -73,21 +73,23 @@
                                         </tr>
                                     </thead>
                                     <tbody id="ExpenseDetailTable">
-                                    @if (Model is {Details.Count: > 0 })
-                                    {
-                                        var sl = 0;
-                                        foreach (var detail in Model.Details)
+                                        @if (Model is { Details.Count: > 0 })
                                         {
-                                            <td>@(++sl)</td>
-                                            <td>@detail.ExpenseItemName</td>
-                                            <td>@detail.Qty</td>
-                                            <td>@detail.UnitPrice</td>
-                                            <td>@detail.Discount</td>
-                                            <td>@detail.Price</td>
-                                            <td>@detail.Note</td>
-                                            <td></td>
+                                            var sl = 0;
+                                            foreach (var detail in Model.Details)
+                                            {
+                                                <tr>
+                                                    <td>@(++sl)</td>
+                                                    <td>@detail.ExpenseItemName</td>
+                                                    <td>@detail.Qty</td>
+                                                    <td>@detail.UnitPrice</td>
+                                                    <td>@detail.Discount</td>
+                                                    <td>@detail.Price</td>
+                                                    <td>@detail.Note</td>
+                                                    <td></td>
+                                                </tr>
+                                            }
                                         }
-                                    }
                                     </tbody>
                                 </table>
                             </div>

@@ -2,7 +2,6 @@
 var $ = jQuery.noConflict(true);
 
 $(document.body).on("change", "#expItemIdVal", function () {
-    var expItemId = 0;
     var value = $(this).val();
     $('#expItemIdValidation').text(null);
     if (value <= 0) {
@@ -13,7 +12,6 @@ $(document.body).on("change", "#expItemIdVal", function () {
 });
 
 $(document.body).on("change", "#expItemQtyVal", function () {
-    var expItemId = 0;
     var value = $(this).val();
     $('#expItemQtyValValidation').text(null);
     if (value <= 0) {
@@ -24,7 +22,6 @@ $(document.body).on("change", "#expItemQtyVal", function () {
 });
 
 $(document.body).on("change", "#expItemUnitPriceVal", function () {
-    var expItemId = 0;
     var value = $(this).val();
     $('#expItemUnitPriceValValidation').text(null);
     if (value <= 0) {
@@ -35,7 +32,6 @@ $(document.body).on("change", "#expItemUnitPriceVal", function () {
 });
 
 $(document.body).on("change", "#expItemUnitDiscountVal", function () {
-    var expItemId = 0;
     var value = $(this).val();
     $('#expItemUnitDiscountValValidation').text(null);
     if (value < 0) {
@@ -58,7 +54,7 @@ function createExpItemDetailRow() {
     var indexCell = "<td style='display:none'><input type='hidden' id='Index" + index + "' name='Details.Index' value='" + index + "'/> </td>";
     var serialCell = "<td>" + (++sl) + "</td>";
 
-    var expItemNameCell = "<td><input type='hidden' id='expItemId" + index + "' name='Details[" + index + "].ExpenseItemId' value='" + selectedItem.ExpenseItemId + "'/>" + selectedItem.ExpenseItemId + "</td>";
+    var expItemNameCell = "<td><input type='hidden' id='expItemId" + index + "' name='Details[" + index + "].ExpenseItemId' value='" + selectedItem.ExpenseItemId + "'/>" + selectedItem.ExpenseItemName + "</td>";
     var expItemQtyCell = "<td><input type='hidden' id='ExpItemQty" + index + "' name='Details[" + index + "].Qty' value='" + selectedItem.ExpItemQty + "'/>" + selectedItem.ExpItemQty + "</td>";
     var expItemUnitPriceCell = "<td><input type='hidden' id='ExpItemUnitPrice" + index + "' name='Details[" + index + "].UnitPrice' value='" + selectedItem.ExpItemUnitPrice + "'/>" + selectedItem.ExpItemUnitPrice + "</td>";
     var expItemUnitDiscountCell = "<td><input type='hidden' id='ExpItemUnitDiscount" + index + "' name='Details[" + index + "].Discount' value='" + selectedItem.ExpItemUnitDiscount + "'/>" + selectedItem.ExpItemUnitDiscount + "</td>";
@@ -76,6 +72,7 @@ function createExpItemDetailRow() {
 function getSelectedItem() {
     //You can validate here
     var expItemId = $("#expItemIdVal").val();
+    var expItemName = $('#expItemIdVal :selected').text();
     var expItemQty = $("#expItemQtyVal").val();
     var expItemUnitPrice = $("#expItemUnitPriceVal").val();
     var expItemUnitDiscount = $("#expItemUnitDiscountVal").val();
@@ -83,6 +80,7 @@ function getSelectedItem() {
 
     var item = {
         "ExpenseItemId": expItemId,
+        "ExpenseItemName": expItemName,
         "ExpItemQty": expItemQty,
         "ExpItemUnitPrice": expItemUnitPrice,
         "ExpItemUnitDiscount": expItemUnitDiscount,

@@ -75,7 +75,7 @@ namespace Service.Services.ExpenseServices
             var result = await Repository.GetAllAsync();
             var data = result.ToList();
             data.Insert(0, new ExpenseItem() { Id = 0, Name = "Select Item" });
-            expItemCacheData = data.ToList<dynamic>();
+            expItemCacheData = data.ToList<object>();
             var isCached = await CacheService.SetStringAsync(CacheKeyName.ExpenseItem.ToString(), expItemCacheData);
             return expItemCacheData;
         }

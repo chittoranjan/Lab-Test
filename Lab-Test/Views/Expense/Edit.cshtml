@@ -80,14 +80,16 @@
                                             var sl = 0;
                                             foreach (var detail in Model.Details)
                                             {
-                                            <td>@(++sl)</td>
-                                            <td>@detail.ExpenseItemName</td>
-                                            <td>@detail.Qty</td>
-                                            <td>@detail.UnitPrice</td>
-                                            <td>@detail.Discount</td>
-                                            <td>@detail.Price</td>
-                                            <td>@detail.Note</td>
-                                            <td></td>
+                                                <tr>
+                                                    <td>@(++sl)</td>
+                                                    <td>@detail.ExpenseItemName</td>
+                                                    <td>@detail.Qty</td>
+                                                    <td>@detail.UnitPrice</td>
+                                                    <td>@detail.Discount</td>
+                                                    <td>@detail.Price</td>
+                                                    <td>@detail.Note</td>
+                                                    <td></td>
+                                                </tr>
                                             }
                                         }
                                     </tbody>
