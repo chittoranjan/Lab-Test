@@ -1,4 +1,4 @@
-﻿namespace Resolver.DistributedRedisCache
+﻿namespace Service.DistributedRedisCache
 {
     public enum CacheKeyName
     {

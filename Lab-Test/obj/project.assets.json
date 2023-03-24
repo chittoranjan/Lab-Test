@@ -4022,8 +4022,6 @@
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
           "Microsoft.AspNetCore.Http.Features": "5.0.17",
           "Microsoft.EntityFrameworkCore": "7.0.3",
-          "Microsoft.Extensions.Caching.Redis": "2.2.0",
-          "Newtonsoft.Json": "13.0.1",
           "ProjectContext": "1.0.0",
           "Service": "1.0.0"
         },
@@ -4039,7 +4037,9 @@
         "framework": ".NETCoreApp,Version=v7.0",
         "dependencies": {
           "AutoMapper": "12.0.0",
+          "Microsoft.Extensions.Caching.Redis": "2.2.0",
           "Model": "1.0.0",
+          "Newtonsoft.Json": "13.0.1",
           "Repository": "1.0.0"
         },
         "compile": {

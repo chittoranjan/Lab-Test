@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Caching.Distributed;
 using Microsoft.Extensions.DependencyInjection;
 using ProjectContext.ProjectDbContext;
 using Repository.IRepositories.IExpenseRepositories;
 using Repository.Repositories.ExpenseRepositories;
-using Resolver.DistributedRedisCache;
 using Resolver.ModelMapper;
 using Service.IServices.IExpenseServices;
 using Service.Services.ExpenseServices;

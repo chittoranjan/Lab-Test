@@ -1,12 +1,8 @@
 ﻿using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Caching.Distributed;
 using Model.DataTablePaginationModels;
 using Model.DtoModels.ExpenseDtoModels;
-using Model.EntityModels.ExpenseModels;
-using Resolver.DistributedRedisCache;
 using Service.IServices.IExpenseServices;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace Lab_Test.Controllers.ExpenseControllers
@@ -18,15 +14,13 @@ namespace Lab_Test.Controllers.ExpenseControllers
         private readonly IExpenseService _iService;
         private readonly IExpenseItemService _iExpItemService;
         public INotyfService NotifyService { get; }
-        public readonly IDistributedCache _iDistributedCache;
-        public readonly DistributedRedisCacheService _CacheService;
-        public ExpenseController(IExpenseService iService, INotyfService iNotifyService, IExpenseItemService iExpItemService, IDistributedCache iDistributedCache)
+
+        public ExpenseController(IExpenseService iService, INotyfService iNotifyService, IExpenseItemService iExpItemService)
         {
             _iService = iService;
             NotifyService = iNotifyService;
             _iExpItemService = iExpItemService;
-            _iDistributedCache = iDistributedCache;
-            _CacheService = new DistributedRedisCacheService(_iDistributedCache);
+
         }
 
         #endregion
@@ -47,18 +41,7 @@ namespace Lab_Test.Controllers.ExpenseControllers
 
         public async Task<IActionResult> Create()
         {
-
-            var expItemData = await _CacheService.GetStringAsync(CacheKeyName.ExpenseItem.ToString());
-
-            if (expItemData.Count <= 0)
-            {
-                var expItemSelectionList = await _iExpItemService.GetSelectionListAsync();
-
-                expItemData = expItemSelectionList.ToList<object>();
-                var result = await _CacheService.SetStringAsync(CacheKeyName.ExpenseItem.ToString(), expItemData);
-            }
-
-            ViewBag.ExpItemSelectionList = expItemData;
+            ViewBag.ExpItemSelectionList = await _iExpItemService.GetSelectionListAsync();
             return View();
         }
 
@@ -82,9 +65,7 @@ namespace Lab_Test.Controllers.ExpenseControllers
         {
             if (id == 0) return NotFound();
 
-            var expItemSelectionList = (await _iExpItemService.GetAllAsync()).ToList();
-            expItemSelectionList.Insert(0, new ExpenseItem() { Id = 0, Name = "Select Item" });
-            ViewBag.ExpItemSelectionList = expItemSelectionList;
+            ViewBag.ExpItemSelectionList = await _iExpItemService.GetSelectionListAsync();
 
             var data = await _iService.GetByIdAsync(id);
             if (data == null) return NotFound();

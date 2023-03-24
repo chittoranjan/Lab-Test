@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.Extensions.Caching.Distributed;
 using Model.DataTablePaginationModels;
 using Model.DtoModels.ExpenseDtoModels;
 using Model.EntityModels.ExpenseModels;
 using Repository.IRepositories.IExpenseRepositories;
 using Service.BaseService;
+using Service.DistributedRedisCache;
 using Service.IServices.IExpenseServices;
 using System;
 using System.Collections.Generic;
@@ -16,10 +18,14 @@ namespace Service.Services.ExpenseServices
     {
         private IExpenseItemRepository Repository { get; set; }
         private readonly IMapper _iMapper;
-        public ExpenseItemService(IExpenseItemRepository iRepository, IMapper iMapper) : base(iRepository)
+        public readonly IDistributedCache DistributedCache;
+        public readonly CacheService CacheService;
+        public ExpenseItemService(IExpenseItemRepository iRepository, IMapper iMapper, IDistributedCache iDistributedCache) : base(iRepository)
         {
             Repository = iRepository;
             _iMapper = iMapper;
+            DistributedCache = iDistributedCache;
+            CacheService = new CacheService(DistributedCache);
         }
 
         public async Task<bool> AddAsync(ExpenseItemDto dto)
@@ -61,12 +67,17 @@ namespace Service.Services.ExpenseServices
             return dataTable;
         }
 
-        public async Task<List<ExpenseItem>> GetSelectionListAsync()
+        public async Task<List<object>> GetSelectionListAsync()
         {
+            var expItemCacheData = await CacheService.GetStringAsync(CacheKeyName.ExpenseItem.ToString());
+            if (expItemCacheData.Count > 0) return expItemCacheData;
+
             var result = await Repository.GetAllAsync();
             var data = result.ToList();
             data.Insert(0, new ExpenseItem() { Id = 0, Name = "Select Item" });
-            return data;
+            expItemCacheData = data.ToList<dynamic>();
+            var isCached = await CacheService.SetStringAsync(CacheKeyName.ExpenseItem.ToString(), expItemCacheData);
+            return expItemCacheData;
         }
 
         public async Task<bool> DeleteAsync(int id)

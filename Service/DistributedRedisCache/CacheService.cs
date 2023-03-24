@@ -5,39 +5,39 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Resolver.DistributedRedisCache
+namespace Service.DistributedRedisCache
 {
-    public class DistributedRedisCacheService:IDistributedRedisCacheService
+    public class CacheService : ICacheService
     {
-        public readonly IDistributedCache _iDistributedCashe;
+        public readonly IDistributedCache DistributedCache;
 
-        public DistributedRedisCacheService(IDistributedCache iDistributedCashe)
+        public CacheService(IDistributedCache iDistributedCache)
         {
-            _iDistributedCashe = iDistributedCashe;
+            DistributedCache = iDistributedCache;
         }
 
         #region Set
         public async Task<bool> SetAsync(string key, List<object> values)
         {
-            if (values == null || values.Count <= 0) return false;
+            if (values is not { Count: > 0 }) return false;
 
             string serializeList = JsonConvert.SerializeObject(values);
             byte[] encodedList = Encoding.UTF8.GetBytes(serializeList);
             var option = new DistributedCacheEntryOptions()
                 .SetSlidingExpiration(TimeSpan.FromMinutes(30))
                 .SetAbsoluteExpiration(TimeSpan.FromHours(6));
-            await _iDistributedCashe.SetAsync(key, encodedList, option);
+            await DistributedCache.SetAsync(key, encodedList, option);
             return true;
         }
         public async Task<bool> SetStringAsync(string key, List<object> values)
         {
-            if (values == null || values.Count <= 0) return false;
+            if (values is not { Count: > 0 }) return false;
 
             string serializeList = JsonConvert.SerializeObject(values);
             var option = new DistributedCacheEntryOptions()
                     .SetSlidingExpiration(TimeSpan.FromMinutes(30))
                     .SetAbsoluteExpiration(TimeSpan.FromHours(6));
-            await _iDistributedCashe.SetStringAsync(key, serializeList, option);
+            await DistributedCache.SetStringAsync(key, serializeList, option);
             return true;
 
 
@@ -48,19 +48,17 @@ namespace Resolver.DistributedRedisCache
         public async Task<List<object>> GetAsync(string key)
         {
             var data = new List<object>();
-            byte[] encodedList = await _iDistributedCashe.GetAsync(key);
-            if (encodedList != null)
-            {
-                string serializeList = Encoding.UTF8.GetString(encodedList);
-                data = JsonConvert.DeserializeObject<List<object>>(serializeList);
-            }
+            byte[] encodedList = await DistributedCache.GetAsync(key);
+            if (encodedList == null) return data;
+            string serializeList = Encoding.UTF8.GetString(encodedList);
+            data = JsonConvert.DeserializeObject<List<object>>(serializeList);
             return data;
         }
 
         public async Task<List<object>> GetStringAsync(string key)
         {
             var data = new List<object>();
-            string serializeList = await _iDistributedCashe.GetStringAsync(key);
+            string serializeList = await DistributedCache.GetStringAsync(key);
             if (serializeList != null)
             {
                 data = JsonConvert.DeserializeObject<List<object>>(serializeList);
@@ -74,7 +72,7 @@ namespace Resolver.DistributedRedisCache
         public async Task<bool> RefreshAsync(string key)
         {
             if (key == null) return false;
-            await _iDistributedCashe.RefreshAsync(key);
+            await DistributedCache.RefreshAsync(key);
             return true;
         }
         #endregion
@@ -83,7 +81,7 @@ namespace Resolver.DistributedRedisCache
         public async Task<bool> RemoveAsync(string key)
         {
             if (key == null) return false;
-            await _iDistributedCashe.RemoveAsync(key);
+            await DistributedCache.RemoveAsync(key);
             return true;
         }
 

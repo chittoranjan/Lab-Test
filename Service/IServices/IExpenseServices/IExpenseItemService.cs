@@ -14,7 +14,7 @@ namespace Service.IServices.IExpenseServices
         new Task<ExpenseItemDto> GetByIdAsync(int id);
         ExpenseItemDto ConvertModelToDto(ExpenseItem model);
         Task<DataTablePagination<ExpenseItemSearchDto>> Search(DataTablePagination<ExpenseItemSearchDto> searchDto);
-        Task<List<ExpenseItem>> GetSelectionListAsync();
+        Task<List<object>> GetSelectionListAsync();
         Task<bool> DeleteAsync(int id);
     }
 }
