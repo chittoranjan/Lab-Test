@@ -17,7 +17,7 @@ namespace Service.DistributedRedisCache
         }
 
         #region Set
-        public async Task<bool> SetAsync(string key, List<object> values)
+        public async Task<bool> SetAsync<T>(string key, List<T> values)
         {
             if (values is not { Count: > 0 }) return false;
 
@@ -29,7 +29,7 @@ namespace Service.DistributedRedisCache
             await DistributedCache.SetAsync(key, encodedList, option);
             return true;
         }
-        public async Task<bool> SetStringAsync(string key, List<object> values)
+        public async Task<bool> SetStringAsync<T>(string key, List<T> values)
         {
             if (values is not { Count: > 0 }) return false;
 
@@ -45,23 +45,23 @@ namespace Service.DistributedRedisCache
         #endregion
 
         #region Get
-        public async Task<List<object>> GetAsync(string key)
+        public async Task<List<T>> GetAsync<T>(string key)
         {
-            var data = new List<object>();
+            var data = new List<T>();
             byte[] encodedList = await DistributedCache.GetAsync(key);
             if (encodedList == null) return data;
             string serializeList = Encoding.UTF8.GetString(encodedList);
-            data = JsonConvert.DeserializeObject<List<object>>(serializeList);
+            data = JsonConvert.DeserializeObject<List<T>>(serializeList);
             return data;
         }
 
-        public async Task<List<object>> GetStringAsync(string key)
+        public async Task<List<T>> GetStringAsync<T>(string key)
         {
-            var data = new List<object>();
+            var data = new List<T>();
             string serializeList = await DistributedCache.GetStringAsync(key);
             if (serializeList != null)
             {
-                data = JsonConvert.DeserializeObject<List<object>>(serializeList);
+                data = JsonConvert.DeserializeObject<List<T>>(serializeList);
             }
             return data;
         }

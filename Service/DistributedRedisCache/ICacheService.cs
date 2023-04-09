@@ -5,11 +5,11 @@ namespace Service.DistributedRedisCache
 {
     public interface ICacheService
     {
-        Task<bool> SetAsync(string key, List<object> values);
-        Task<bool> SetStringAsync(string key, List<object> values);
+        Task<bool> SetAsync<T>(string key, List<T> values);
+        Task<bool> SetStringAsync<T>(string key, List<T> values);
 
-        Task<List<object>> GetAsync(string key);
-        Task<List<object>> GetStringAsync(string key);
+        Task<List<T>> GetAsync<T>(string key);
+        Task<List<T>> GetStringAsync<T>(string key);
 
         Task<bool> RemoveAsync(string key);
         Task<bool> RefreshAsync(string key);

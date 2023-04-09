@@ -1,6 +1,35 @@
 ﻿
 var $ = jQuery.noConflict(true);
 
+$(document).ready(function () {
+    var expenseId = $("#ExpenseIdHidden").attr("data-id");
+    if (expenseId != "" && expenseId != undefined) {
+        getExpenseDetailsByExpenseId(expenseId);
+    }
+
+});
+
+function getExpenseDetailsByExpenseId(expenseId) {
+    var json = { expenseId: expenseId };
+    $.ajax({
+        type: "GET",
+        url: subDirectory + 'Loader/GetExpenseDetailsByExpenseId',
+        contentType: "application/json; charset=utf-8",
+        data: JSON.stringify(json),
+        success: function (data) {
+            if (data != null) {
+                $.each(data, function (key, value) {
+                    createNewRowForExpense(index, value);
+                    itemList.push(value.ExpenseItemId);
+                });
+
+            }
+
+        }
+    });
+}
+
+
 $(document.body).on("change", "#expItemIdVal", function () {
     var value = $(this).val();
     $('#expItemIdValidation').text(null);

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.Caching.Distributed;
 using Model.DataTablePaginationModels;
 using Model.DtoModels.ExpenseDtoModels;
 using Model.EntityModels.ExpenseModels;
@@ -18,14 +17,12 @@ namespace Service.Services.ExpenseServices
     {
         private IExpenseItemRepository Repository { get; set; }
         private readonly IMapper _iMapper;
-        public readonly IDistributedCache DistributedCache;
-        public readonly CacheService CacheService;
-        public ExpenseItemService(IExpenseItemRepository iRepository, IMapper iMapper, IDistributedCache iDistributedCache) : base(iRepository)
+        private readonly ICacheService _iCacheService;
+        public ExpenseItemService(IExpenseItemRepository iRepository, IMapper iMapper, ICacheService iCacheService) : base(iRepository)
         {
             Repository = iRepository;
             _iMapper = iMapper;
-            DistributedCache = iDistributedCache;
-            CacheService = new CacheService(DistributedCache);
+            _iCacheService = iCacheService;
         }
 
         public async Task<bool> AddAsync(ExpenseItemDto dto)
@@ -67,16 +64,16 @@ namespace Service.Services.ExpenseServices
             return dataTable;
         }
 
-        public async Task<List<object>> GetSelectionListAsync()
+        public async Task<List<ExpenseItem>> GetSelectionListAsync()
         {
-            var expItemCacheData = await CacheService.GetStringAsync(CacheKeyName.ExpenseItem.ToString());
+            var expItemCacheData = await _iCacheService.GetStringAsync<ExpenseItem>(CacheKeyName.ExpenseItem.ToString());
             if (expItemCacheData.Count > 0) return expItemCacheData;
 
             var result = await Repository.GetAllAsync();
             var data = result.ToList();
             data.Insert(0, new ExpenseItem() { Id = 0, Name = "Select Item" });
-            expItemCacheData = data.ToList<object>();
-            var isCached = await CacheService.SetStringAsync(CacheKeyName.ExpenseItem.ToString(), expItemCacheData);
+            expItemCacheData = data.ToList<ExpenseItem>();
+            var isCached = await _iCacheService.SetStringAsync(CacheKeyName.ExpenseItem.ToString(), expItemCacheData);
             return expItemCacheData;
         }
 
