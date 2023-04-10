@@ -52,6 +52,7 @@ namespace Lab_Test.Controllers.ExpenseControllers
             // }
             //
             // var result = _iService.AddRange(models);
+            //var data = _iService.ExecuteSqlRawQuery("SELECT * FROM dbo.ExpenseItem Where Id>0");
             return View();
         }
 

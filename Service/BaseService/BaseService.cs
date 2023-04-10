@@ -221,8 +221,18 @@ namespace Service.BaseService
         {
             return await Repository.GetLastOrDefaultAsync(predicate, isTracking, includes);
         }
+        #endregion
 
+        #region ExecuteSqlRawQuery
+        public bool ExecuteSqlRawQuery(string sqlQuery)
+        {
+            return Repository.ExecuteSqlRawQuery(sqlQuery);
+        }
 
+        public async Task<bool> ExecuteSqlRawQueryAsync(string sqlQuery)
+        {
+            return await Repository.ExecuteSqlRawQueryAsync(sqlQuery);
+        }
         #endregion
 
         #region GetDeleted

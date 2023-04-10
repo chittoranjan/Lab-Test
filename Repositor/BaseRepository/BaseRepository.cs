@@ -397,7 +397,22 @@ namespace Repository.BaseRepository
 
             return result;
         }
+        #endregion
 
+        #region ExecuteSqlRawQuery
+        public bool ExecuteSqlRawQuery(string sqlQuery)
+        {
+            if (sqlQuery == null) return false;
+            var data = Db.Database.ExecuteSqlRaw(sqlQuery);
+            return data > 0;
+        }
+
+        public async Task<bool> ExecuteSqlRawQueryAsync(string sqlQuery)
+        {
+            if (sqlQuery == null) return false;
+            var data = await Db.Database.ExecuteSqlRawAsync(sqlQuery);
+            return data > 0;
+        }
 
         #endregion
 
@@ -415,8 +430,6 @@ namespace Repository.BaseRepository
         }
 
         #endregion
-
-
 
         public virtual void Dispose()
         {

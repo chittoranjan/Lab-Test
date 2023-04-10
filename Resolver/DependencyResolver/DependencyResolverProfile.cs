@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
+using ProjectContext.ProjectDbContext;
 using Repository.IRepositories.IExpenseRepositories;
 using Repository.Repositories.ExpenseRepositories;
 using Resolver.ModelMapper;
@@ -12,7 +14,7 @@ namespace Resolver.DependencyResolver
     {
         public void ConfigServiceMap(IServiceCollection services)
         {
-            //services.AddTransient<DbContext, LabTestDbContext>();
+            // services.AddTransient<DbContext, LabTestDbContext>();
             services.AddTransient<ICacheService, CacheService>();
 
             #region Expense Dependency Resolve

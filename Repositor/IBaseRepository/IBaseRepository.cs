@@ -78,6 +78,13 @@ namespace Repository.IBaseRepository
 
         #endregion
 
+        #region ExecuteSqlRawQuery
+        bool ExecuteSqlRawQuery(string sqlQuery);
+        Task<bool> ExecuteSqlRawQueryAsync(string sqlQuery);
+
+        #endregion
+
+
         #region GetDeleted
         ICollection<T> GetDeleted(Expression<Func<T, bool>> predicate, bool isTracking = true);
         Task<List<T>> GetDeletedAsync(Expression<Func<T, bool>> predicate, bool isTracking = true);
