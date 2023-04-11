@@ -1,9 +1,12 @@
-﻿using AspNetCoreHero.ToastNotification.Abstractions;
+﻿using System;
+using System.Collections.Generic;
+using AspNetCoreHero.ToastNotification.Abstractions;
 using Microsoft.AspNetCore.Mvc;
 using Model.DataTablePaginationModels;
 using Model.DtoModels.ExpenseDtoModels;
 using Service.IServices.IExpenseServices;
 using System.Threading.Tasks;
+using Model.EntityModels.ExpenseModels;
 
 namespace Lab_Test.Controllers.ExpenseControllers
 {
@@ -38,21 +41,22 @@ namespace Lab_Test.Controllers.ExpenseControllers
 
         public IActionResult Create()
         {
-            // List<ExpenseItem> models = new List<ExpenseItem>();
-            // for (int i = 11001; i <= 20000; i++)
-            // {
-            //     var model = new ExpenseItem()
-            //     {
-            //         Id = 0,
-            //         Name = "Test Item " + i,
-            //         UnitPrice = 10 + i,
-            //         Description = "Test Description" + i,
-            //     };
-            //     models.Add(model);
-            // }
-            //
-            // var result = _iService.AddRange(models);
-            //var data = _iService.ExecuteSqlRawQuery("SELECT * FROM dbo.ExpenseItem Where Id>0");
+            //throw new Exception("I am Exception!");
+            //List<ExpenseItem> models = new List<ExpenseItem>();
+            //for (int i = 20001; i <= 50000; i++)
+            //{
+            //    var model = new ExpenseItem()
+            //    {
+            //        Id = 0,
+            //        Name = "Test Item " + i,
+            //        UnitPrice = 10 + i,
+            //        Description = "Test Description " + i,
+            //    };
+            //    models.Add(model);
+            //}
+
+            //var result = _iService.AddRange(models);
+            // var data = _iService.ExecuteSqlRawQuery("DELETE FROM ExpenseItem WHERE Id > 50000");
             return View();
         }
 

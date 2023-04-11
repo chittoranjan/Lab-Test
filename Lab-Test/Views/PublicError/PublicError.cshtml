@@ -1,0 +1,32 @@
+﻿@{
+    ViewData["Title"] = "Public Error";
+}
+<div class="container-fluid">
+    <div class="card">
+        <div class="card-header bg-danger text-white text-left">
+            <h6></h6>
+        </div>
+        <div class="card-body">
+            <h1 class="text-danger">Error.</h1>
+            <h2 class="text-danger">An error occurred while processing your request.</h2>
+            <h5 class="text-danger">Please contact with support team!</h5>
+            <hr />
+            <h3>Exception Details:</h3>
+            <div class="alert alert-danger">
+                <h5>Exception Path</h5>
+                <hr />
+                <p>@ViewBag.ExceptionPath</p>
+            </div>
+            <div class="alert alert-danger">
+                <h5>Exception Message</h5>
+                <hr />
+                <p>@ViewBag.ExceptionMessage</p>
+            </div>
+            <div class="alert alert-danger">
+                <h5>Exception Stack Trace</h5>
+                <hr />
+                <p>@ViewBag.ExceptionStackTrace</p>
+            </div>
+        </div>
+    </div>
+</div>
