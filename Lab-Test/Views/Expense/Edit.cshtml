@@ -80,15 +80,30 @@
                                             var sl = 0;
                                             foreach (var detail in Model.Details)
                                             {
+                                                var index = sl;
                                                 <tr>
-                                                    <td>@(++sl)</td>
+                                                    <td style='display: none'><input name='Details.Index' type='hidden' value='@index' /></td>
+                                                    <td>
+                                                        <input type='hidden' id='Details@(index)_ExpenseId' name='Details[@index].ExpenseId' value='@Model.Id' />
+                                                        <input type='hidden' id='Details@(index)_Id' name='Details[@index].Id' value='@detail.Id' />
+                                                        <input type='hidden' id='Details@(index)_ExpenseItemId' name='Details[@index].ExpenseItemId' value='@detail.ExpenseItemId' />
+                                                        <input type='hidden' id='Details@(index)_Qty' name='Details[@index].Qty' value='@detail.Qty' />
+                                                        <input type='hidden' id='Details@(index)_UnitPrice' name='Details[@index].UnitPrice' value='@detail.UnitPrice' />
+                                                        <input type='hidden' id='Details@(index)_Price' name='Details[@index].Price' value='@detail.Price' />
+                                                        <input type='hidden' id='Details@(index)_Discount' name='Details[@index].Discount' value='@detail.Discount' />
+                                                        <input type='hidden' id='Details@(index)_Note' name='Details[@index].Note' value='@detail.Note' />
+                                                        <label id='Details_@(index)_Serial' value='@(++sl)'>@(sl)</label>
+                                                    </td>
                                                     <td>@detail.ExpenseItemName</td>
                                                     <td>@detail.Qty</td>
                                                     <td>@detail.UnitPrice</td>
                                                     <td>@detail.Discount</td>
                                                     <td>@detail.Price</td>
                                                     <td>@detail.Note</td>
-                                                    <td></td>
+                                                    <td>
+                                                        <a href='#' id="btnEditItem_@(index)" data-id="@index" data-quantity="@detail.Qty" data-price="@detail.Price" onclick="editRowForDetails(this)"><i class='fa fa-pencil text-warning m-1' title='Edit' aria-hidden='true'></i></a>
+                                                        <a href='#' id="btnDeleteItem_@(index)" data-id="@index" data-quantity="@detail.Qty" data-price="@detail.Price" onclick="deleteRowForDetails(this)"><i class='fa fa-trash-o text-danger m-1' title='Delete' aria-hidden='true'></i></a>
+                                                    </td>
                                                 </tr>
                                             }
                                         }
