@@ -81,7 +81,7 @@
                                             foreach (var detail in Model.Details)
                                             {
                                                 var index = sl;
-                                                <tr>
+                                                <tr id="trExpenseItem@(index)">
                                                     <td style='display: none'><input name='Details.Index' type='hidden' value='@index' /></td>
                                                     <td>
                                                         <input type='hidden' id='Details@(index)_ExpenseId' name='Details[@index].ExpenseId' value='@Model.Id' />
@@ -101,8 +101,10 @@
                                                     <td>@detail.Price</td>
                                                     <td>@detail.Note</td>
                                                     <td>
-                                                        <a href='#' id="btnEditItem_@(index)" data-id="@index" data-quantity="@detail.Qty" data-price="@detail.Price" onclick="editRowForDetails(this)"><i class='fa fa-pencil text-warning m-1' title='Edit' aria-hidden='true'></i></a>
-                                                        <a href='#' id="btnDeleteItem_@(index)" data-id="@index" data-quantity="@detail.Qty" data-price="@detail.Price" onclick="deleteRowForDetails(this)"><i class='fa fa-trash-o text-danger m-1' title='Delete' aria-hidden='true'></i></a>
+                                                        @*<a href='#' id="btnEditItem_@(index)" data-id="@index" data-quantity="@detail.Qty" data-price="@detail.Price" onclick="editRowForDetails(this)"><i class='fa fa-pencil text-warning m-1' title='Edit' aria-hidden='true'></i></a>*@
+                                                        <button type="button" id="btnEditItem_@(index)" data-id="@index" data-quantity="@detail.Qty" data-price="@detail.Price" class="btn btn-outline-warning btn-sm" title="Edit" onclick="editRowForExpItem(this)">Edit</button>
+                                                        @*<a href='#' id="btnDeleteItem_@(index)" data-id="@index" data-quantity="@detail.Qty" data-price="@detail.Price" onclick="deleteRowForDetails(this)"><i class='fa fa-trash-o text-danger m-1' title='Delete' aria-hidden='true'></i></a>*@
+                                                        <button type="button" id="btnDeleteItem_@(index)" data-id="@index" data-quantity="@detail.Qty" data-price="@detail.Price" class="btn btn-outline-danger btn-sm" title="Delete" onclick="removeRowForExpItem(this)">Delete</button>
                                                     </td>
                                                 </tr>
                                             }
@@ -142,7 +144,7 @@
                                 <div class="form-group">
                                     <label>Expense Item</label>
                                     @* <input id="expItemIdVal" type="number" min="1" class="form-control" /> *@
-                                    <select id="expItemIdVal" asp-for="Id" class="form-control" asp-items="@(new SelectList(@ViewBag.ExpItemSelectionList, "Id","Name"))"></select>
+                                    <select id="expItemIdVal" class="form-control" asp-items="@(new SelectList(@ViewBag.ExpItemSelectionList, "Id","Name"))"></select>
                                     <span id="expItemIdValidation" class="text-danger"></span>
                                 </div>
                             </div>

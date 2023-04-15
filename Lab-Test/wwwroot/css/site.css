@@ -78,6 +78,9 @@ body {
 .btn-width {
     min-width: 72px;
 }
+.btn-sm {
+    margin-bottom: 3px;
+}
 
 .bgcolor {
     background: #F8F8F8;
@@ -90,5 +93,7 @@ body {
         padding-left: 5px;
         margin-bottom: 10px;
     }
+
 }
+
 
