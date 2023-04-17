@@ -78,6 +78,9 @@ body {
 .btn-width {
     min-width: 72px;
 }
+.btn-width-sm {
+    min-width:58px;
+}
 .btn-sm {
     margin-bottom: 3px;
 }

@@ -92,9 +92,9 @@ function createExpItemNewDetailRow() {
     var expItemNoteCell = "<td><input type='hidden' id='ExpItemNote" + index + "' name='Details[" + index + "].Note' value='" + selectedItem.ExpItemNote + "'/>" + selectedItem.ExpItemNote + "</td>";
 
     //var editBtn = "<a href='#' id='btnEditItem_@" + (index) + "' data-id=" + index + " data-quantity=" + selectedItem.Qty + " data-price=" + selectedItem.Price + "><i class='fa fa-pencil text-warning m-1' title='Edit' aria-hidden='true'></i></a>";
-    var editBtn = "<input id='btnEditItem_@" + index + "' class='btn btn-outline-warning btn-sm' value='Edit' type='button' title='Edit' data-id='" + index + "' data-quantity='" + selectedItem.ExpItemQty + "' data-price='" + selectedItem.ExpItemUnitPrice + "' onclick='editRowForExpItem(this);' />";
+    var editBtn = "<input id='btnEditItem_@" + index + "' class='btn btn-outline-warning btn-sm btn-width-sm' value='Edit' type='button' title='Edit' data-id='" + index + "' data-quantity='" + selectedItem.ExpItemQty + "' data-price='" + selectedItem.ExpItemUnitPrice + "' onclick='editRowForExpItem(this);' />";
     //var deleteBtn = "<a href='#' id='btnDeleteItem_@" + (index) + "' data-id=" + index + " data-quantity=" + selectedItem.Qty + " data-price=" + selectedItem.Price + "><i class='fa fa-trash-o text-danger m-1' title='Delete' aria-hidden='true'></i></a>";
-    var deleteBtn = "<input id='btnDeleteItem_@" + index + "' class='btn btn-outline-danger btn-sm' value='Delete' type='button' title='Delete' data-id='" + index + "' data-quantity='" + selectedItem.ExpItemQty + "' data-price='" + selectedItem.ExpItemUnitPrice + "' onclick='removeRowForExpItem(this);' />";
+    var deleteBtn = "<input id='btnDeleteItem_@" + index + "' class='btn btn-outline-danger btn-sm btn-width-sm' value='Delete' type='button' title='Delete' data-id='" + index + "' data-quantity='" + selectedItem.ExpItemQty + "' data-price='" + selectedItem.ExpItemUnitPrice + "' onclick='removeRowForExpItem(this);' />";
     var actionCell = "<td>" + editBtn +"  " + deleteBtn + "</td>";
 
     var createNewRow = "<tr id='trExpenseItem" + index + "'>" + indexCell + serialCell + expeneIdCell + expItemNameCell + expItemQtyCell + expItemUnitPriceCell + expItemUnitDiscountCell + expItemPrice + expItemNoteCell + actionCell + " </tr>";
@@ -135,15 +135,10 @@ function clearSelectedItem() {
 
 function editRowForExpItem(obj) {
     var model = $(obj);
-    var id = $(model).attr("data-id");
-    //var rowQty = $(model).attr("data-quantity");
-    //var rowPrice = $(model).attr("data-price");
-    //var deletableQty = parseFloat(rowQty);
-    //var deletablePrice = parseFloat(rowPrice);
-
-    var controlToBeRemoved = "#trExpenseItem" + id;
-
+    var index = $(model).attr("data-id");
     $("#editExpDetailModal").modal('show');
+    $("#expItemAddButton").hide();
+    $("#expItemUpdateButton").show();
 
 }
 

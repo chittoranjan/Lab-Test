@@ -102,9 +102,9 @@
                                                     <td>@detail.Note</td>
                                                     <td>
                                                         @*<a href='#' id="btnEditItem_@(index)" data-id="@index" data-quantity="@detail.Qty" data-price="@detail.Price" onclick="editRowForDetails(this)"><i class='fa fa-pencil text-warning m-1' title='Edit' aria-hidden='true'></i></a>*@
-                                                        <button type="button" id="btnEditItem_@(index)" data-id="@index" data-quantity="@detail.Qty" data-price="@detail.Price" class="btn btn-outline-warning btn-sm" title="Edit" onclick="editRowForExpItem(this)">Edit</button>
+                                                        <button type="button" id="btnEditItem_@(index)" data-id="@index" data-quantity="@detail.Qty" data-price="@detail.Price" class="btn btn-outline-warning btn-sm btn-width-sm" title="Edit" onclick="editRowForExpItem(this)">Edit</button>
                                                         @*<a href='#' id="btnDeleteItem_@(index)" data-id="@index" data-quantity="@detail.Qty" data-price="@detail.Price" onclick="deleteRowForDetails(this)"><i class='fa fa-trash-o text-danger m-1' title='Delete' aria-hidden='true'></i></a>*@
-                                                        <button type="button" id="btnDeleteItem_@(index)" data-id="@index" data-quantity="@detail.Qty" data-price="@detail.Price" class="btn btn-outline-danger btn-sm" title="Delete" onclick="removeRowForExpItem(this)">Delete</button>
+                                                        <button type="button" id="btnDeleteItem_@(index)" data-id="@index" data-quantity="@detail.Qty" data-price="@detail.Price" class="btn btn-outline-danger btn-sm btn-width-sm" title="Delete" onclick="removeRowForExpItem(this)">Delete</button>
                                                     </td>
                                                 </tr>
                                             }
@@ -183,6 +183,7 @@
 
             <div class="modal-footer">
                 <button id="expItemAddButton" type="button" class="btn btn-primary btn-width">Add</button>
+                <button id="expItemUpdateButton" type="button" class="btn btn-warning btn-width">Update</button>
                 <button type="button" class="btn btn-danger btn-width" data-dismiss="modal">Close</button>
             </div>
 
