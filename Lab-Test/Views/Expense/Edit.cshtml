@@ -101,9 +101,7 @@
                                                     <td>@detail.Price</td>
                                                     <td>@detail.Note</td>
                                                     <td>
-                                                        @*<a href='#' id="btnEditItem_@(index)" data-id="@index" data-quantity="@detail.Qty" data-price="@detail.Price" onclick="editRowForDetails(this)"><i class='fa fa-pencil text-warning m-1' title='Edit' aria-hidden='true'></i></a>*@
-                                                        <button type="button" id="btnEditItem_@(index)" data-id="@index" data-quantity="@detail.Qty" data-price="@detail.Price" class="btn btn-outline-warning btn-sm btn-width-sm" title="Edit" onclick="editRowForExpItem(this)">Edit</button>
-                                                        @*<a href='#' id="btnDeleteItem_@(index)" data-id="@index" data-quantity="@detail.Qty" data-price="@detail.Price" onclick="deleteRowForDetails(this)"><i class='fa fa-trash-o text-danger m-1' title='Delete' aria-hidden='true'></i></a>*@
+                                                        <button type="button" id="btnEditItem_@(index)" data-id="@index" data-detailId="@detail.Id" data-expenseItemId="@detail.ExpenseItemId" data-qty="@detail.Qty" data-unitPrice="@detail.UnitPrice" data-price="@detail.Price" data-discount="@detail.Discount" data-note="@detail.Note" class="btn btn-outline-warning btn-sm btn-width-sm" title="Edit" onclick="editRowForExpItem(this)">Edit</button>
                                                         <button type="button" id="btnDeleteItem_@(index)" data-id="@index" data-quantity="@detail.Qty" data-price="@detail.Price" class="btn btn-outline-danger btn-sm btn-width-sm" title="Delete" onclick="removeRowForExpItem(this)">Delete</button>
                                                     </td>
                                                 </tr>
@@ -137,21 +135,21 @@
             </div>
 
             <div class="modal-body">
+                <input type="hidden" id="updateRowIndex"/>
                 <div class="row">
                     <div class="col-sm-12">
                         <div class="row">
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Expense Item</label>
-                                    @* <input id="expItemIdVal" type="number" min="1" class="form-control" /> *@
-                                    <select id="expItemIdVal" class="form-control" asp-items="@(new SelectList(@ViewBag.ExpItemSelectionList, "Id","Name"))"></select>
+                                    <select id="expItemIdVal" class="form-control" asp-items="@(new SelectList(@ViewBag.ExpItemSelectionList, "Id", "Name"))"></select>
                                     <span id="expItemIdValidation" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Qty</label>
-                                    <input id="expItemQtyVal" type="number" min="1" class="form-control" />
+                                    <input id="expItemQtyVal" type="number" value="1" class="form-control"/>
                                     <span id="expItemQtyValValidation" class="text-danger"></span>
                                 </div>
                             </div>
@@ -160,14 +158,14 @@
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Unit Price</label>
-                                    <input id="expItemUnitPriceVal" type="number" min="1" class="form-control" />
+                                    <input id="expItemUnitPriceVal" type="number" min="1" class="form-control"/>
                                     <span id="expItemUnitPriceValValidation" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-sm-6">
                                 <div class="form-group">
                                     <label>Unit Discount</label>
-                                    <input id="expItemUnitDiscountVal" type="number" min="0" class="form-control" />
+                                    <input id="expItemUnitDiscountVal" type="number" min="0" class="form-control"/>
                                     <span id="expItemUnitDiscountValValidation" class="text-danger"></span>
                                 </div>
                             </div>
