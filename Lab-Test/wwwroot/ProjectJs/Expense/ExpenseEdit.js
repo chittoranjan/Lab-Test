@@ -31,43 +31,61 @@ var $ = jQuery.noConflict(true);
 
 
 $(document.body).on("change", "#expItemIdVal", function () {
-    var value = $(this).val();
+    getExpItemIdValidation();
+});
+function getExpItemIdValidation() {
+    var value = $("#expItemIdVal").val();
     $('#expItemIdValidation').text(null);
     if (value <= 0) {
         var msg = "Sorry, Expense Item is required!";
         $('#expItemIdValidation').text(msg);
         return;
     }
-});
+}
 
 $(document.body).on("change", "#expItemQtyVal", function () {
-    var value = $(this).val();
+    getExpItemQtyValValidation();
+});
+function getExpItemQtyValValidation() {
+    var value = $("#expItemQtyVal").val();
     $('#expItemQtyValValidation').text(null);
     if (value <= 0) {
         var msg = "Sorry, Expense Item Qty is not valid!";
         $('#expItemQtyValValidation').text(msg);
         return;
     }
-});
+}
 
 $(document.body).on("change", "#expItemUnitPriceVal", function () {
-    var value = $(this).val();
+    getexpItemUnitPriceValValidation();
+});
+function getexpItemUnitPriceValValidation() {
+    var value = $("#expItemUnitPriceVal").val();
     $('#expItemUnitPriceValValidation').text(null);
     if (value <= 0) {
         var msg = "Sorry, Expense Item unit price is not valid!";
         $('#expItemUnitPriceValValidation').text(msg);
+        $("#editExpDetailModal").modal('show');
         return;
     }
-});
+}
 
 $(document.body).on("change", "#expItemUnitDiscountVal", function () {
-    var value = $(this).val();
+    getExpItemUnitDiscountValValidation();
+});
+function getExpItemUnitDiscountValValidation() {
+    var value = $("#expItemUnitDiscountVal").val();
     $('#expItemUnitDiscountValValidation').text(null);
     if (value < 0) {
         var msg = "Sorry, Expense Item unit price Discount is not valid!";
         $('#expItemUnitDiscountValValidation').text(msg);
         return;
     }
+}
+
+$("#btnAddItem").click(function () {
+    $("#expItemAddButton").show();
+    $("#expItemUpdateButton").hide();
 });
 
 $("#expItemAddButton").click(function () {
@@ -103,6 +121,12 @@ function createExpItemNewDetailRow() {
 
 function getSelectedItem() {
     //You can validate here
+    getExpItemIdValidation();
+    getExpItemQtyValValidation();
+    getexpItemUnitPriceValValidation();
+    getExpItemUnitDiscountValValidation();
+
+
     var expenseId = $("#ExpenseIdHidden").attr("data-id");
     var expItemId = $("#expItemIdVal").val();
     var expItemName = $('#expItemIdVal :selected').text();
