@@ -100,7 +100,8 @@ function createExpItemNewDetailRow() {
     var indexCell = "<td style='display:none'><input type='hidden' id='Index" + index + "' name='Details.Index' value='" + index + "'/> </td>";
     var serialCell = "<td>" + (++sl) + "</td>";
 
-    var expeneIdCell = "<td style='display:none'><input type='hidden' id='expenseId" + index + "' name='[" + index + "].ExpenseId' value='" + selectedItem.ExpenseId + "'/> </td>";
+    var expeneIdCell = "<td style='display:none'><input type='hidden' id='expenseId" + index + "' name='Details[" + index + "].ExpenseId' value='" + selectedItem.ExpenseId + "'/> </td>";
+    var expeneDetailIdCell = "<td style='display:none'><input type='hidden' id='expenseDetailId" + index + "' name='Details[" + index + "].Id' value='" + selectedItem.DetailId + "'/> </td>";
     var expItemNameCell = "<td><input type='hidden' id='expItemId" + index + "' name='Details[" + index + "].ExpenseItemId' value='" + selectedItem.ExpenseItemId + "'/>" + selectedItem.ExpenseItemName + "</td>";
     var expItemQtyCell = "<td><input type='hidden' id='ExpItemQty" + index + "' name='Details[" + index + "].Qty' value='" + selectedItem.ExpItemQty + "'/>" + selectedItem.ExpItemQty + "</td>";
     var expItemUnitPriceCell = "<td><input type='hidden' id='ExpItemUnitPrice" + index + "' name='Details[" + index + "].UnitPrice' value='" + selectedItem.ExpItemUnitPrice + "'/>" + selectedItem.ExpItemUnitPrice + "</td>";
@@ -113,7 +114,7 @@ function createExpItemNewDetailRow() {
     var deleteBtn = "<input id='btnDeleteItem_@" + index + "' class='btn btn-outline-danger btn-sm btn-width-sm' value='Delete' type='button' title='Delete' data-id='" + index + "' data-quantity='" + selectedItem.ExpItemQty + "' data-price='" + selectedItem.ExpItemUnitPrice + "' onclick='removeRowForExpItem(this);' />";
     var actionCell = "<td>" + editBtn +"  " + deleteBtn + "</td>";
 
-    var createNewRow = "<tr id='trExpenseItem" + index + "'>" + indexCell + serialCell + expeneIdCell + expItemNameCell + expItemQtyCell + expItemUnitPriceCell + expItemUnitDiscountCell + expItemPrice + expItemNoteCell + actionCell + " </tr>";
+    var createNewRow = "<tr id='trExpenseItem" + index + "'>" + indexCell + serialCell + expeneIdCell + expeneDetailIdCell + expItemNameCell + expItemQtyCell + expItemUnitPriceCell + expItemUnitDiscountCell + expItemPrice + expItemNoteCell + actionCell + " </tr>";
     $("#ExpenseDetailTable").append(createNewRow);
 
     clearSelectedItem();
@@ -127,8 +128,9 @@ function getSelectedItem() {
     getExpItemUnitDiscountValValidation();
 
 
-    var expenseId = $("#ExpenseIdHidden").attr("data-id");
+    var expenseId = $("#ExpenseIdHidden").val();
     var expItemId = $("#expItemIdVal").val();
+    var detailId = $("#updateDetailId").val();
     var expItemName = $('#expItemIdVal :selected').text();
     var expItemQty = $("#expItemQtyVal").val();
     var expItemUnitPrice = $("#expItemUnitPriceVal").val();
@@ -137,6 +139,7 @@ function getSelectedItem() {
 
     var item = {
         "ExpenseId": expenseId,
+        "DetailId": detailId,
         "ExpenseItemId": expItemId,
         "ExpenseItemName": expItemName,
         "ExpItemQty": expItemQty,
@@ -167,6 +170,7 @@ function editRowForExpItem(obj) {
     var rowNote = $(model).attr("data-note");
 
     $("#updateRowIndex").val(id);
+    $("#updateDetailId").val(rowDetailId);
     $("#expItemIdVal").val(rowExpenseItemId).trigger("change.select2");
     $("#expItemQtyVal").val(rowQty);
     $("#expItemUnitPriceVal").val(rowUnitPrice);
@@ -188,7 +192,8 @@ $(document.body).on("click", "#expItemUpdateButton", function () {
     var indexCell = "<td style='display:none'><input type='hidden' id='Index" + index + "' name='Details.Index' value='" + index + "'/> </td>";
     var serialCell = "<td>" + (++sl) + "</td>";
 
-    var expeneIdCell = "<td style='display:none'><input type='hidden' id='expenseId" + index + "' name='[" + index + "].ExpenseId' value='" + updatedItem.ExpenseId + "'/> </td>";
+    var expeneIdCell = "<td style='display:none'><input type='hidden' id='expenseId" + index + "' name='Details[" + index + "].ExpenseId' value='" + updatedItem.ExpenseId + "'/> </td>";
+    var expeneDetailIdCell = "<td style='display:none'><input type='hidden' id='expenseDetailId" + index + "' name='Details[" + index + "].Id' value='" + updatedItem.DetailId + "'/> </td>";
     var expItemNameCell = "<td><input type='hidden' id='expItemId" + index + "' name='Details[" + index + "].ExpenseItemId' value='" + updatedItem.ExpenseItemId + "'/>" + updatedItem.ExpenseItemName + "</td>";
     var expItemQtyCell = "<td><input type='hidden' id='ExpItemQty" + index + "' name='Details[" + index + "].Qty' value='" + updatedItem.ExpItemQty + "'/>" + updatedItem.ExpItemQty + "</td>";
     var expItemUnitPriceCell = "<td><input type='hidden' id='ExpItemUnitPrice" + index + "' name='Details[" + index + "].UnitPrice' value='" + updatedItem.ExpItemUnitPrice + "'/>" + updatedItem.ExpItemUnitPrice + "</td>";
@@ -201,7 +206,7 @@ $(document.body).on("click", "#expItemUpdateButton", function () {
     var deleteBtn = "<input id='btnDeleteItem_@" + index + "' class='btn btn-outline-danger btn-sm btn-width-sm' value='Delete' type='button' title='Delete' data-id='" + index + "' data-quantity='" + updatedItem.ExpItemQty + "' data-price='" + updatedItem.ExpItemUnitPrice + "' onclick='removeRowForExpItem(this);' />";
     var actionCell = "<td>" + editBtn + "  " + deleteBtn + "</td>";
 
-    var createNewRow = "<tr id='trExpenseItem" + index + "'>" + indexCell + serialCell + expeneIdCell + expItemNameCell + expItemQtyCell + expItemUnitPriceCell + expItemUnitDiscountCell + expItemPrice + expItemNoteCell + actionCell + " </tr>";
+    var createNewRow = "<tr id='trExpenseItem" + index + "'>" + indexCell + serialCell + expeneIdCell + expeneDetailIdCell + expItemNameCell + expItemQtyCell + expItemUnitPriceCell + expItemUnitDiscountCell + expItemPrice + expItemNoteCell + actionCell + " </tr>";
 
     var controlToBeRemoved = "#trExpenseItem" + updateRowIndex;
     $(controlToBeRemoved).remove();
