@@ -95,6 +95,7 @@ $("#expItemAddButton").click(function () {
 function createExpItemNewDetailRow() {
     var selectedItem = getSelectedItem();
     var index = $("#ExpenseDetailTable").children("tr").length;
+    index++;
     var sl = index;
 
     var indexCell = "<td style='display:none'><input type='hidden' id='Index" + index + "' name='Details.Index' value='" + index + "'/> </td>";
@@ -112,7 +113,7 @@ function createExpItemNewDetailRow() {
 
     var editBtn = "<input id='btnEditItem_@" + index + "' class='btn btn-outline-warning btn-sm btn-width-sm' value='Edit' type='button' title='Edit' data-id='" + index + "' data-quantity='" + selectedItem.ExpItemQty + "' data-price='" + selectedItem.ExpItemUnitPrice + "' onclick='editRowForExpItem(this);' />";
     var deleteBtn = "<input id='btnDeleteItem_@" + index + "' class='btn btn-outline-danger btn-sm btn-width-sm' value='Delete' type='button' title='Delete' data-id='" + index + "' data-quantity='" + selectedItem.ExpItemQty + "' data-price='" + selectedItem.ExpItemUnitPrice + "' onclick='removeRowForExpItem(this);' />";
-    var actionCell = "<td>" + editBtn +"  " + deleteBtn + "</td>";
+    var actionCell = "<td>" + editBtn + "  " + deleteBtn + "</td>";
 
     var createNewRow = "<tr id='trExpenseItem" + index + "'>" + indexCell + serialCell + expeneIdCell + expeneDetailIdCell + expItemNameCell + expItemQtyCell + expItemUnitPriceCell + expItemUnitDiscountCell + expItemPrice + expItemNoteCell + actionCell + " </tr>";
     $("#ExpenseDetailTable").append(createNewRow);
@@ -151,6 +152,7 @@ function getSelectedItem() {
 };
 
 function clearSelectedItem() {
+    $("#updateDetailId").val(0);
     $("#expItemIdVal").val(0);
     $("#expItemQtyVal").val(0);
     $("#expItemUnitPriceVal").val(0);
@@ -206,12 +208,12 @@ $(document.body).on("click", "#expItemUpdateButton", function () {
     var deleteBtn = "<input id='btnDeleteItem_@" + index + "' class='btn btn-outline-danger btn-sm btn-width-sm' value='Delete' type='button' title='Delete' data-id='" + index + "' data-quantity='" + updatedItem.ExpItemQty + "' data-price='" + updatedItem.ExpItemUnitPrice + "' onclick='removeRowForExpItem(this);' />";
     var actionCell = "<td>" + editBtn + "  " + deleteBtn + "</td>";
 
-    var createNewRow = "<tr id='trExpenseItem" + index + "'>" + indexCell + serialCell + expeneIdCell + expeneDetailIdCell + expItemNameCell + expItemQtyCell + expItemUnitPriceCell + expItemUnitDiscountCell + expItemPrice + expItemNoteCell + actionCell + " </tr>";
+    var updateRow = "<tr id='trExpenseItem" + index + "'>" + indexCell + serialCell + expeneIdCell + expeneDetailIdCell + expItemNameCell + expItemQtyCell + expItemUnitPriceCell + expItemUnitDiscountCell + expItemPrice + expItemNoteCell + actionCell + " </tr>";
 
     var controlToBeRemoved = "#trExpenseItem" + updateRowIndex;
     $(controlToBeRemoved).remove();
 
-    $("#ExpenseDetailTable").append(createNewRow);
+    $("#ExpenseDetailTable").append(updateRow);
 
     clearSelectedItem();
 });
